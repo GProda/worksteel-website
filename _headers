@@ -1,58 +1,34 @@
-## Netlify Security Headers — Work Steel SHPK
-## Place this file in the root of your site folder (same level as worksteel-optimized.html)
+## Netlify Headers — Work Steel SHPK
 
 /*
-  # Prevent MIME type sniffing
   X-Content-Type-Options: nosniff
-
-  # Prevent clickjacking (no iframing of your site)
   X-Frame-Options: SAMEORIGIN
-
-  # Legacy XSS browser protection
   X-XSS-Protection: 1; mode=block
-
-  # Control referrer info sent to third parties
   Referrer-Policy: strict-origin-when-cross-origin
-
-  # Disable browser features you don't need
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
-
-  # Force HTTPS for 1 year (Netlify enforces HTTPS so this is safe)
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-
-  # Content Security Policy
-  # Allows: your own domain, Google Fonts, Google Analytics/GTM, Meta Pixel, Formspree
   Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://www.facebook.com https://formspree.io; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;
 
-# Cache CSS and JS for 1 week (versioned by deploy)
 /style.css
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
 
 /main.js
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
 
-# Cache images aggressively (they rarely change)
 /Work-Steel-Website-photos/*
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
 
-# Cache favicons and static assets
 /*.png
   Cache-Control: public, max-age=2592000, immutable
+
 /*.svg
   Cache-Control: public, max-age=2592000, immutable
+
 /*.jpg
   Cache-Control: public, max-age=2592000, immutable
+
 /*.webmanifest
   Cache-Control: public, max-age=86400
 
-# Cache fonts forever (immutable)
-/fonts/*
-  Cache-Control: public, max-age=31536000, immutable
-
-# Never cache HTML (so updates are instant)
 /*.html
   Cache-Control: no-cache, no-store, must-revalidate
-
-# Don't expose the _headers file itself
-/_headers
-  X-Robots-Tag: noindex

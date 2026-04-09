@@ -1,0 +1,20 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "http://worksteel.al/*"
+  to   = "https://worksteel.al/:splat"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from = "http://www.worksteel.al/*"
+  to   = "https://worksteel.al/:splat"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from = "https://www.worksteel.al/*"
+  to   = "https://worksteel.al/:splat"
+  status = 301
+  force  = true
