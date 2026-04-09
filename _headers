@@ -24,9 +24,26 @@
   # Allows: your own domain, Google Fonts, Google Analytics/GTM, Meta Pixel, Formspree
   Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://www.facebook.com https://formspree.io; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;
 
+# Cache CSS and JS for 1 week (versioned by deploy)
+/style.css
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/main.js
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
 # Cache images aggressively (they rarely change)
 /Work-Steel-Website-photos/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Cache favicons and static assets
+/*.png
+  Cache-Control: public, max-age=2592000, immutable
+/*.svg
+  Cache-Control: public, max-age=2592000, immutable
+/*.jpg
+  Cache-Control: public, max-age=2592000, immutable
+/*.webmanifest
+  Cache-Control: public, max-age=86400
 
 # Cache fonts forever (immutable)
 /fonts/*
