@@ -1,0 +1,21 @@
+{
+  "name": "Work Steel SHPK",
+  "short_name": "Work Steel",
+  "description": "Punime metalike me porosi në Tiranë — shkallë, parmakë, struktura çeliku",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D0D0D",
+  "theme_color": "#183C3B",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

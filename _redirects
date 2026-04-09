@@ -1,0 +1,12 @@
+# Netlify Redirects — Work Steel SHPK
+# Place this file in the root of your site folder
+
+# Redirect www to non-www (canonical domain)
+https://www.worksteel.al/* https://worksteel.al/:splat 301!
+
+# Redirect HTTP to HTTPS (Netlify handles this automatically, but belt-and-suspenders)
+http://worksteel.al/* https://worksteel.al/:splat 301!
+http://www.worksteel.al/* https://worksteel.al/:splat 301!
+
+# SPA fallback — serve index for all routes (important for direct URL access)
+/* /worksteel-optimized.html 200
