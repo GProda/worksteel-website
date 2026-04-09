@@ -1625,17 +1625,16 @@ document.querySelectorAll('.contact-form-ws:not(#ksContactForm)').forEach(form =
     if (!thresholdDone || !pageDone) return;
 
     // Phase 2 — logo flies to top-left corner, background fades out
+    // Use transform-only animation (GPU composited, no layout reflow)
+    const rect = logo.getBoundingClientRect();
+    const targetX = 24 - rect.left;
+    const targetY = 24 - rect.top;
+    const scaleRatio = 30 / 62; // target font-size / initial font-size
     logo.style.transition = [
-      'top 0.92s cubic-bezier(0.76,0,0.24,1)',
-      'left 0.92s cubic-bezier(0.76,0,0.24,1)',
-      'font-size 0.92s cubic-bezier(0.76,0,0.24,1)',
       'transform 0.92s cubic-bezier(0.76,0,0.24,1)',
       'opacity 0.3s ease 0.62s'
     ].join(', ');
-    logo.style.top       = '24px';
-    logo.style.left      = '24px';
-    logo.style.transform = 'translate(0, 0)';
-    logo.style.fontSize  = '30px';
+    logo.style.transform = `translate(calc(-50% + ${targetX}px), calc(-50% + ${targetY}px)) scale(${scaleRatio})`;
     logo.style.opacity   = '0';
     setTimeout(() => splash.classList.add('fading'), 120);
 
