@@ -908,7 +908,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 100px 72px 0 64px;
+  padding: 60px 72px 0 64px;
   position: relative;
 }
 /* thin brass vertical rule — editorial luxury detail */
