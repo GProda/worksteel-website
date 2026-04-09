@@ -57,7 +57,11 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://connect.facebook.net">
 <link rel="dns-prefetch" href="https://wa.me">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Hero image preload — loads in parallel with HTML parsing, not after -->
+<link rel="preload" as="image" href="Work-Steel-Website-photos/WS_photos_1.jpeg">
+<!-- Fonts load non-blocking — page renders immediately with fallback font, swaps when ready -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 
 <!-- JSON-LD: LOCAL BUSINESS / METAL WORKER -->
 <script type="application/ld+json">
@@ -1504,6 +1508,6 @@ function declineCookies(){
   </div>
 </div>
 
-<script src="/main.js" defer></script>
-</script>
+<script src="/main.js"></script>
+</body>
 </html>

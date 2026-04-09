@@ -1594,25 +1594,37 @@ document.querySelectorAll('.contact-form-ws:not(#ksContactForm)').forEach(form =
 // ========================
 // PAGE LOAD ANIMATION
 // ========================
-window.addEventListener('load', () => {
-  // Always start at the very top — prevents browser scroll restoration from offsetting the page
+// Strategy: start the splash the moment the DOM is parsed (fast).
+// Gate Phase 2 on BOTH:
+//   (a) a minimum display threshold so the animation always feels intentional, AND
+//   (b) the page being fully loaded (images etc.)
+// Whichever takes longer wins — the user never waits extra if the page was slow.
+
+(function() {
+  const THRESHOLD = 1000; // ms — minimum time the splash logo holds before flying
+
   history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
 
-  const logo      = document.getElementById('splash-ws-logo');
-  const splash    = document.getElementById('splash-screen');
+  const logo       = document.getElementById('splash-ws-logo');
+  const splash     = document.getElementById('splash-screen');
   const wsMonogram = document.getElementById('ws-monogram');
 
-  // Phase 1 — Fade WS logo in at screen centre
+  // Phase 1 — Fade logo in immediately (DOM is ready, no images needed)
   requestAnimationFrame(() => requestAnimationFrame(() => {
     logo.style.transition = 'opacity 0.55s cubic-bezier(0.16,1,0.3,1)';
     logo.style.opacity    = '1';
   }));
 
-  // Phase 2 — After hold: logo flies to top-left, dark BG fades out
-  setTimeout(() => {
-    // Multi-property transition: position + size fly over 0.92s,
-    // then opacity fades to 0 with a 0.5s delay so it vanishes near the corner
+  // Two gates: threshold timer + page load. Phase 2 fires when both are done.
+  let thresholdDone = false;
+  let pageDone      = false;
+  const splashStart = performance.now();
+
+  function runPhase2() {
+    if (!thresholdDone || !pageDone) return;
+
+    // Phase 2 — logo flies to top-left corner, background fades out
     logo.style.transition = [
       'top 0.92s cubic-bezier(0.76,0,0.24,1)',
       'left 0.92s cubic-bezier(0.76,0,0.24,1)',
@@ -1624,28 +1636,37 @@ window.addEventListener('load', () => {
     logo.style.left      = '24px';
     logo.style.transform = 'translate(0, 0)';
     logo.style.fontSize  = '30px';
-    logo.style.opacity   = '0'; // fires after 0.62s delay
-    // Background starts fading slightly after the fly begins
+    logo.style.opacity   = '0';
     setTimeout(() => splash.classList.add('fading'), 120);
-  }, 1000);
 
-  // Phase 3 — Logo has landed; reveal real monogram + trigger HERO animations only
-  setTimeout(() => {
-    wsMonogram.style.transition = 'opacity 0.3s ease';
-    wsMonogram.style.opacity    = '1';
-    logo.style.display          = 'none';
-    // Only fire hero-gated elements — scroll-reveal handles everything below the fold
-    document.querySelectorAll('.page.active .hero-reveal').forEach(function(el) {
-      el.classList.add('visible');
-    });
-    // Trigger word reveal on hero heading (slight delay so fade-in leads)
-    setTimeout(function() {
-      document.querySelectorAll('.page.active .hero-reveal.reveal-words').forEach(function(el) {
-        el.classList.add('words-visible');
+    // Phase 3 — reveal monogram + trigger hero animations
+    setTimeout(() => {
+      wsMonogram.style.transition = 'opacity 0.3s ease';
+      wsMonogram.style.opacity    = '1';
+      logo.style.display          = 'none';
+      document.querySelectorAll('.page.active .hero-reveal').forEach(el => {
+        el.classList.add('visible');
       });
-    }, 250);
-  }, 1480);
-});
+      setTimeout(() => {
+        document.querySelectorAll('.page.active .hero-reveal.reveal-words').forEach(el => {
+          el.classList.add('words-visible');
+        });
+      }, 250);
+    }, 480); // 480ms after phase 2 starts (fly is 0.92s, reveal at ~halfway)
+  }
+
+  // Gate A — minimum threshold
+  const elapsed = performance.now() - splashStart;
+  const remaining = Math.max(0, THRESHOLD - elapsed);
+  setTimeout(() => { thresholdDone = true; runPhase2(); }, remaining);
+
+  // Gate B — page fully loaded (images, fonts, everything)
+  if (document.readyState === 'complete') {
+    pageDone = true;
+  } else {
+    window.addEventListener('load', () => { pageDone = true; runPhase2(); }, { once: true });
+  }
+})();
 
 
 // ========================
