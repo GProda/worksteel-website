@@ -8,7 +8,7 @@
 
 A single-page, multi-language (Albanian / English) marketing website for Work Steel SHPK — a bespoke metalwork studio specializing in custom staircases, railings, doors, structural steel, and interior metalwork.
 
-Built as a single `index.html` with all CSS and JavaScript inline. No framework, no build step, no dependencies — just ship it.
+Built with pure HTML, external CSS (`style.css`), and external JS (`main.js`). No framework, no build step, no dependencies — just ship it.
 
 ---
 
@@ -36,11 +36,43 @@ Built as a single `index.html` with all CSS and JavaScript inline. No framework,
 
 ---
 
+## Running Locally
+
+This is a static site — no install, no build. You just need a local web server so the browser can load `style.css` and `main.js` correctly (opening `index.html` directly as a file won't work with absolute asset paths like `/style.css`).
+
+**Option A — Node.js (recommended, one-time setup)**
+
+1. Make sure Node.js is installed → [nodejs.org](https://nodejs.org)
+2. Open a terminal in the project folder
+3. Run:
+   ```bash
+   npx serve .
+   ```
+4. Open the URL shown in the terminal (usually `http://localhost:3000`)
+
+**Option B — Python (no install needed if Python is already on your machine)**
+
+```bash
+python3 -m http.server 8080
+```
+Then open `http://localhost:8080`
+
+**Option C — VS Code Live Server extension**
+
+1. Install the **Live Server** extension in VS Code
+2. Right-click `index.html` → **Open with Live Server**
+
+> The contact form (Formspree) will not send emails when running locally — this only works on the live domain.
+
+---
+
 ## Project Structure
 
 ```
 worksteel-deploy/
-├── index.html              # Entire site — HTML, CSS, JS all inline
+├── index.html              # Site HTML
+├── style.css               # All site styles (extracted for caching)
+├── main.js                 # All site JavaScript (extracted for caching)
 ├── privacy.html            # Privacy policy page
 ├── og-image.jpg            # Open Graph share image (1200×630)
 ├── favicon.svg / .png      # Favicons
