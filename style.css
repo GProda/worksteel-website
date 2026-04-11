@@ -2884,15 +2884,15 @@ footer.light { background: var(--cream); border-top-color: rgba(139,107,74,0.15)
 }
 .wa-float svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--brass); }
 .wa-float .wa-label { white-space: nowrap; }
-@media (max-width: 640px) {
-  .wa-float { padding: 11px 14px; right: 16px; bottom: 76px; font-size: 10px; gap: 7px; }
+@media (max-width: 768px) {
+  .wa-float { display: none; }
 }
 
-/* STICKY MOBILE CTA BAR — bottom of screen, mobile only */
+/* STICKY MOBILE CTA BAR — bottom of screen, tablet + mobile */
 .mob-cta-bar {
   display: none;
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .mob-cta-bar {
     display: flex;
     position: fixed;
