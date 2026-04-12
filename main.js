@@ -287,19 +287,74 @@ document.querySelectorAll('.project-card').forEach(card => {
 const pages = ['home','punot','arkitekture','objekte','sherbime','kontakt'];
 let currentPage = 'home';
 
-function updateHeaderForPage(pageId) {
-  const header = document.getElementById('site-header');
-  const monogram = document.getElementById('ws-monogram');
-  if (pageId === 'sherbime') {
-    header.classList.add('light-theme');
-    monogram.classList.add('dark');
-  } else {
-    header.classList.remove('light-theme');
-    monogram.classList.remove('dark');
+// ── OVERLAY COLOUR SYSTEM ──────────────────────────────────────────────
+// Maps section CSS classes → background theme for the WS monogram & hamburger.
+// Color theory: brass (warm gold) on dark, charcoal on cream/light, cream on bronze.
+const SECTION_THEME_MAP = {
+  'portfolio-section':     'light',
+  'cat-section':           'light',
+  'cat-hero':              'light',
+  'faq-section':           'light',
+  'domains-section':       'light',
+  'steel-foundation':      'light',
+  'services-editorial':    'bronze',
+  'contact-types-section': 'light',
+  'guiding-section':       'light',
+  'exp-referencat':        'light',
+};
+
+function _getThemeAtY(pageId, checkY) {
+  const pageEl = document.getElementById('page-' + pageId);
+  if (!pageEl) return 'dark';
+  const sections = pageEl.querySelectorAll('section, .cat-hero');
+  let theme = 'dark';
+  for (const sec of sections) {
+    const r = sec.getBoundingClientRect();
+    if (r.top <= checkY && r.bottom > checkY) {
+      for (const cls in SECTION_THEME_MAP) {
+        if (sec.classList.contains(cls)) { theme = SECTION_THEME_MAP[cls]; break; }
+      }
+      break;
+    }
   }
+  return theme;
+}
+
+function applyOverlayTheme(theme, skipHeader) {
+  const mono  = document.getElementById('ws-monogram');
+  const hb    = document.getElementById('hamburger');
+  const hdr   = document.getElementById('site-header');
+  if (!mono || !hb) return;
+
+  mono.classList.remove('dark', 'on-bronze');
+  hb.classList.remove('dark-bg', 'on-bronze');
+
+  if (theme === 'light') {
+    mono.classList.add('dark');
+    hb.classList.add('dark-bg');
+    if (!skipHeader) hdr && hdr.classList.add('light-theme');
+  } else if (theme === 'bronze') {
+    mono.classList.add('on-bronze');
+    hb.classList.add('on-bronze');
+    if (!skipHeader) hdr && hdr.classList.remove('light-theme');
+  } else {
+    if (!skipHeader) hdr && hdr.classList.remove('light-theme');
+  }
+}
+
+function updateHeaderForPage(pageId) {
+  // Active nav link
   document.querySelectorAll('.header-nav a').forEach(a => a.classList.remove('active-page'));
   const match = document.querySelector(`.header-nav a[data-page="${pageId}"]`);
   if (match) match.classList.add('active-page');
+  // Colour at scroll top (y=55 — centre of the fixed symbols)
+  const theme = _getThemeAtY(pageId, 55);
+  applyOverlayTheme(theme);
+}
+
+function updateOverlayOnScroll() {
+  const theme = _getThemeAtY(currentPage, 55);
+  applyOverlayTheme(theme, true); // skip header class — handled separately
 }
 
 function navigateTo(pageId) {
@@ -424,6 +479,7 @@ window.addEventListener('scroll', () => {
         }
         lastScroll = current;
       }
+      updateOverlayOnScroll();
       scrollTicking = false;
     });
     scrollTicking = true;
@@ -815,13 +871,24 @@ function toggleType(item) {
 // ========================
 // MOBILE MENU
 // ========================
+var _menuScrollY = 0;
 function openMobileMenu() {
+  _menuScrollY = window.scrollY;
   document.getElementById('mobile-menu').classList.add('open');
+  var hb = document.getElementById('hamburger');
+  if (hb) hb.classList.add('menu-open');
+  var mono = document.getElementById('ws-monogram');
+  if (mono) mono.style.opacity = '0';
   document.body.style.overflow = 'hidden';
 }
 function closeMobileMenu() {
   document.getElementById('mobile-menu').classList.remove('open');
+  var hb = document.getElementById('hamburger');
+  if (hb) hb.classList.remove('menu-open');
+  var mono = document.getElementById('ws-monogram');
+  if (mono) mono.style.opacity = '';
   document.body.style.overflow = '';
+  window.scrollTo(0, _menuScrollY);
 }
 
 // ========================
@@ -843,7 +910,7 @@ const translations = {
   al: {
     // ── HOME ──
     heroStatement: '<span class="vh">Punime metalike me porosi — shkallë, parmakë dhe struktura çeliku të bëra me dorë në Tiranë.</span><span class="hero-line-1" aria-hidden="true">Punime metalike me porosi</span><span class="hero-line-2" aria-hidden="true">Shkallë,</span><span class="hero-line-3" aria-hidden="true">parmakë &amp; çelik</span><span class="hero-line-4" aria-hidden="true">me dorë — Tiranë.</span>',
-    aboutText: 'Që nga viti 2018, kemi realizuar mbi 30 projekte për arkitektë, dizajnerë dhe klientë privatë në mbarë Shqipërinë. Çdo punim mban emrin tonë.',
+    aboutText: 'Që nga viti 2018, kemi realizuar mbi 120 projekte për arkitektë, dizajnerë dhe klientë privatë në mbarë Shqipërinë. Çdo punim mban emrin tonë.',
     aboutCaption: 'Punishtja jonë ndodhet në zemër të Tiranës. Saldim TIG/MIG, prerje precize, finitura me dorë — çdo fazë brenda punishtjes sonë, pa ndërmjetës, pa kompromis.',
     btnOferte: 'KËRKO OFERTË FALAS',
     btnPunet: 'PUNËT',
@@ -867,16 +934,16 @@ const translations = {
     // ── NAV / FOOTER ──
     navArch: 'ARKITEKTURË', navObj: 'OBJEKTE', navServices: 'SHËRBIME',
     navExpertise: 'EKSPERTIZË', navContact: 'KONTAKT',
-    mobileNavArch: 'Arkitekturë & Struktura', mobileNavObj: 'Objekte',
+    mobileNavArch: 'Arkitekturë', mobileNavObj: 'Objekte',
     mobileNavServices: 'Shërbime', mobileNavExpertise: 'Ekspertizë', mobileNavContact: 'Kontakt',
     footerNavProjects: 'PUNËT', footerNavServices: 'SHËRBIMET', footerNavContact: 'KONTAKT',
     footerTagline: 'Punime Metalike me Porosi · Custom Metalwork',
     footerCopyright: '© Work Steel që nga 2018',
     // ── PORTFOLIO ──
-    archPageTitle: 'Arkitekturë<br>&amp; Struktura',
-    archFilterActive: 'Arkitekturë &amp; Struktura ×', archFilterOther: 'Objekte',
+    archPageTitle: 'Arkitekturë',
+    archFilterActive: 'Arkitekturë ×', archFilterOther: 'Objekte',
     objPageTitle: 'Objekte',
-    objFilterOther: 'Arkitekturë &amp; Struktura', objFilterActive: 'Objekte ×',
+    objFilterOther: 'Arkitekturë', objFilterActive: 'Objekte ×',
     portfolioFilterLabel: 'FILTRO SIPAS',
     portfolioShowMore: 'SHFAQ MË SHUMË',
     // ── EKSPERTIZË ──
@@ -906,7 +973,7 @@ const translations = {
     servicesEditorialSubs: ['Nën-kontraktim artistik', 'Prezantime, objekte', 'Teatër, kinema'],
     domainsLabel: 'FUSHAT E APLIKIMIT',
     domainsHeading: 'Ku Punon Work Steel',
-    domainTitles: ['Arkitekturë &amp; Struktura', 'Dizajn Interior', 'Arte &amp; Skulpturë', 'Industri &amp; Ndërtim', 'Struktur Metalike', 'Luksi &amp; Prezantim'],
+    domainTitles: ['Arkitekturë', 'Dizajn Interior', 'Arte &amp; Skulpturë', 'Industri &amp; Ndërtim', 'Struktur Metalike', 'Luksi &amp; Prezantim'],
     domainDescs: [
       'Shkallë, railingë, dyer dhe struktura portante çeliku — punime të qëndrueshme për hapësirat tuaja.',
       'Raftë, elementë ndriçimi dhe detaje dekorative çeliku që i japin karakter çdo ambienti.',
@@ -947,7 +1014,7 @@ const translations = {
     modalRelated: 'PUNIME TË TJERA',
     punot_pageTitle: 'Punët',
     punot_filterAll: 'Të Gjitha',
-    punot_filterArch: 'Arkitekturë & Struktura',
+    punot_filterArch: 'Arkitekturë',
     punot_filterObj: 'Objekte',
     // ── FAQ ──
     faqLabel: 'PYETJE TË SHPESHTA',
@@ -975,8 +1042,12 @@ const translations = {
     gdprTextK: 'Pranoj politikën e privatësisë dhe përdorimin e të dhënave të mia për t\'iu përgjigjur mesazhit.',
     contactColAddress: 'Adresa',
     contactColHours: 'E Hënë — E Premte, 08:00 — 18:00',
-    contactColContact: 'Kontakt',
-    contactColSocial: 'Social',
+    navArchitecture: 'Arkitekturë',
+    navObjekte: 'Objekte',
+    navSherbime: 'Shërbime',
+    navKontakt: 'Kontakt',
+    contactColContact: 'Kontaktet',
+    contactColSocial: 'Mediat tona sociale',
     // ── COOKIE BANNER ──
     cookieText: 'Ne përdorim cookies për të analizuar trafikun dhe për të përmirësuar përvojën tuaj. Duke klikuar "Prano", ju pranoni përdorimin tonë të cookies. <a href="/privacy.html">Mëso më shumë</a>',
     cookieAccept: 'Prano',
@@ -997,7 +1068,7 @@ const translations = {
   en: {
     // ── HOME ──
     heroStatement: '<span class="vh">Custom metalwork to order — staircases, railings and steel structures handcrafted in Tirana, Albania.</span><span class="hero-line-1" aria-hidden="true">Custom metalwork to order</span><span class="hero-line-2" aria-hidden="true">Staircases,</span><span class="hero-line-3" aria-hidden="true">railings &amp; steel</span><span class="hero-line-4" aria-hidden="true">handcrafted — Tirana.</span>',
-    aboutText: 'Since 2018, we\'ve delivered 30+ projects for architects, designers and private clients across Albania. Every piece carries our name.',
+    aboutText: 'Since 2018, we\'ve delivered 120+ projects for architects, designers and private clients across Albania. Every piece carries our name.',
     aboutCaption: 'Our workshop is in the heart of Tirana. TIG/MIG welding, precision cutting, hand finishing — every job handled in-house, without intermediaries or compromise.',
     btnOferte: 'REQUEST FREE QUOTE',
     btnPunet: 'PROJECTS',
@@ -1021,16 +1092,16 @@ const translations = {
     // ── NAV / FOOTER ──
     navArch: 'ARCHITECTURE', navObj: 'OBJECTS', navServices: 'SERVICES',
     navExpertise: 'EXPERTISE', navContact: 'CONTACT',
-    mobileNavArch: 'Architecture & Structure', mobileNavObj: 'Objects',
+    mobileNavArch: 'Architecture', mobileNavObj: 'Objects',
     mobileNavServices: 'Services', mobileNavExpertise: 'Expertise', mobileNavContact: 'Contact',
     footerNavProjects: 'PROJECTS', footerNavServices: 'SERVICES', footerNavContact: 'CONTACT',
     footerTagline: 'Custom Metalwork · Punime me Porosi',
     footerCopyright: '© Work Steel since 2018',
     // ── PORTFOLIO ──
-    archPageTitle: 'Architecture<br>&amp; Structure',
-    archFilterActive: 'Architecture &amp; Structure ×', archFilterOther: 'Objects',
+    archPageTitle: 'Architecture',
+    archFilterActive: 'Architecture ×', archFilterOther: 'Objects',
     objPageTitle: 'Objects',
-    objFilterOther: 'Architecture &amp; Structure', objFilterActive: 'Objects ×',
+    objFilterOther: 'Architecture', objFilterActive: 'Objects ×',
     portfolioFilterLabel: 'FILTER BY',
     portfolioShowMore: 'SHOW MORE',
     // ── EKSPERTIZË ──
@@ -1060,7 +1131,7 @@ const translations = {
     servicesEditorialSubs: ['Artistic sub-contracting', 'Presentations, objects', 'Theatre, film'],
     domainsLabel: 'DOMAINS OF APPLICATION',
     domainsHeading: 'Where Work Steel Operates',
-    domainTitles: ['Architecture &amp; Structure', 'Interior Design', 'Art &amp; Sculpture', 'Industry &amp; Construction', 'Stage Design', 'Luxury &amp; Exhibition'],
+    domainTitles: ['Architecture', 'Interior Design', 'Art &amp; Sculpture', 'Industry &amp; Construction', 'Stage Design', 'Luxury &amp; Exhibition'],
     domainDescs: [
       'Staircases, railings, doors, and load-bearing steel structures — durable work for your spaces.',
       'Shelving, lighting elements, and decorative steel details that give character to any interior.',
@@ -1101,7 +1172,7 @@ const translations = {
     modalRelated: 'OTHER PROJECTS',
     punot_pageTitle: 'Works',
     punot_filterAll: 'All',
-    punot_filterArch: 'Architecture & Structure',
+    punot_filterArch: 'Architecture',
     punot_filterObj: 'Objects',
     // ── FAQ ──
     faqLabel: 'FREQUENTLY ASKED',
@@ -1129,7 +1200,11 @@ const translations = {
     gdprTextK: 'I agree to the privacy policy and the use of my data to respond to this message.',
     contactColAddress: 'Address',
     contactColHours: 'Monday — Friday, 08:00 — 18:00',
-    contactColContact: 'Contact',
+    navArchitecture: 'Architecture',
+    navObjekte: 'Objects',
+    navSherbime: 'Services',
+    navKontakt: 'Contact',
+    contactColContact: 'Our Contacts',
     contactColSocial: 'Social',
     // ── COOKIE BANNER ──
     cookieText: 'We use cookies to analyse traffic and improve your experience. By clicking "Accept", you consent to our use of cookies. <a href="/privacy.html">Learn more</a>',
@@ -2180,3 +2255,31 @@ window.addEventListener('load', function() {
     }
   }, { passive: true });
 })();
+
+// ========================
+// TOUCH TAP RIPPLE
+// Shows a brief brass ring where the user taps, then disappears.
+// Only runs on touch devices.
+// ========================
+(function() {
+  if (!('ontouchstart' in window)) return;
+  document.addEventListener('touchstart', function(e) {
+    var touch = e.touches[0];
+    var ripple = document.createElement('span');
+    ripple.className = 'tap-ripple';
+    ripple.style.left = touch.clientX + 'px';
+    ripple.style.top  = touch.clientY + 'px';
+    document.body.appendChild(ripple);
+    setTimeout(function() { ripple.remove(); }, 480);
+  }, { passive: true });
+})();
+
+// ========================
+// MOBILE MENU LANG TOGGLE
+// ========================
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('#mobile-menu .lang-toggle button');
+  if (!btn) return;
+  var lang = btn.textContent.trim() === 'AL' ? 'al' : 'en';
+  switchLanguage(lang);
+});
