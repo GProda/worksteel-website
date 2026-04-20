@@ -30,7 +30,6 @@ body {
   color: var(--cream);
   font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
-  cursor: default;
 }
 
 .playfair { font-family: 'Playfair Display', serif; }
@@ -190,7 +189,7 @@ body {
 }
 .header-nav a {
   font-family: 'DM Sans', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 3px;
   color: rgba(245,240,235,0.65);
@@ -3598,7 +3597,7 @@ footer.light { background: var(--cream); border-top-color: rgba(139,107,74,0.15)
     transition: background 0.18s ease;
   }
   .mob-cta-bar a:first-child {
-    color: var(--silver);
+    color: var(--cream);
     border-right: 1px solid rgba(201,169,110,0.2);
   }
   .mob-cta-bar a:first-child:active { background: rgba(255,255,255,0.06); }
@@ -3711,6 +3710,10 @@ footer.light { background: var(--cream); border-top-color: rgba(139,107,74,0.15)
 .cookie-banner button:hover { background: #d8b87a; }
 .cookie-banner button.secondary:hover { background: rgba(245,240,235,0.08); }
 
+
+@media (max-width: 768px) {
+  .cookie-banner { bottom: 76px; }
+}
 
 /* ===================== */
 /* TOUCH TAP RIPPLE      */

@@ -104,16 +104,38 @@ const projectData = {
 // PROJECT MODAL
 // ========================
 
+// Cached modal element references (queried once, reused on every open)
+var _modalEls = null;
+function getModalEls() {
+  if (_modalEls) return _modalEls;
+  _modalEls = {
+    category:   document.getElementById('modalCategory'),
+    title:      document.getElementById('modalTitle'),
+    desc:       document.getElementById('modalDesc'),
+    year:       document.getElementById('modalYear'),
+    client:     document.getElementById('modalClient'),
+    mainImg:    document.getElementById('modalMainImg'),
+    gallery:    document.getElementById('modalGallery'),
+    img1:       document.getElementById('modalGalleryImg1'),
+    img2:       document.getElementById('modalGalleryImg2'),
+    img3:       document.getElementById('modalGalleryImg3'),
+    relLabel:   document.getElementById('modalRelatedLabel'),
+    relGrid:    document.getElementById('modalRelatedGrid'),
+  };
+  _modalEls.gallerySec = _modalEls.gallery ? _modalEls.gallery.querySelector('.project-modal-gallery-secondary') : null;
+  return _modalEls;
+}
+
 // Pool of gallery images to cycle through
 const galleryPool = [
-  'Work-Steel-Website-photos/WS_photos_1.jpeg',
-  'Work-Steel-Website-photos/WS_photos_4.jpeg',
-  'Work-Steel-Website-photos/WS_photos_7.jpeg',
-  'Work-Steel-Website-photos/WS_photos_9.jpeg',
-  'Work-Steel-Website-photos/WS_photos_14.jpeg',
-  'Work-Steel-Website-photos/WS_photos_22.jpeg',
-  'Work-Steel-Website-photos/WS_photos_32.jpeg',
-  'Work-Steel-Website-photos/WS_photos_41.jpeg',
+  'fotot-compressed/P37/37.3.webp',
+  'fotot-compressed/P128/128.1.webp',
+  'fotot-compressed/P56/56.3.webp',
+  'fotot-compressed/P109/109.1.webp',
+  'fotot-compressed/P105/105.1.webp',
+  'fotot-compressed/P115/115.1.webp',
+  'fotot-compressed/P140/140.1.webp',
+  'fotot-compressed/P43/43.5.webp',
 ];
 
 function pickGalleryImgs(mainSrc) {
@@ -153,48 +175,42 @@ function openProjectModal(card) {
   } catch(e) { galleryExtras = []; }
 
   // Populate modal header fields
-  document.getElementById('modalCategory').textContent = categoryDisplay;
-  document.getElementById('modalTitle').textContent    = titleDisplay;
-  document.getElementById('modalDesc').textContent     = descDisplay;
-  document.getElementById('modalYear').textContent     = year;
-  document.getElementById('modalClient').textContent   = 'Privat';
-  document.getElementById('modalMainImg').src = mainImgSrc;
-  document.getElementById('modalMainImg').alt = titleDisplay;
+  var m = getModalEls();
+  m.category.textContent = categoryDisplay;
+  m.title.textContent    = titleDisplay;
+  m.desc.textContent     = descDisplay;
+  m.year.textContent     = year;
+  m.client.textContent   = 'Privat';
+  m.mainImg.src          = mainImgSrc;
+  m.mainImg.alt          = titleDisplay;
 
   // Gallery section — show only if there are extra photos beyond cover
-  const galleryEl  = document.getElementById('modalGallery');
-  const gallerySec = galleryEl.querySelector('.project-modal-gallery-secondary');
-  const img1 = document.getElementById('modalGalleryImg1');
-  const img2 = document.getElementById('modalGalleryImg2');
-  const img3 = document.getElementById('modalGalleryImg3');
-
   if (!galleryExtras || galleryExtras.length === 0) {
-    galleryEl.style.display = 'none';
+    m.gallery.style.display = 'none';
   } else {
-    galleryEl.style.display = '';
-    img1.src = galleryExtras[0];
-    img1.alt = titleDisplay;
+    m.gallery.style.display = '';
+    m.img1.src = galleryExtras[0];
+    m.img1.alt = titleDisplay;
     if (galleryExtras.length === 1) {
-      gallerySec.style.display = 'none';
+      m.gallerySec.style.display = 'none';
     } else {
-      gallerySec.style.display = '';
-      img2.src = galleryExtras[1];
-      img2.alt = titleDisplay;
+      m.gallerySec.style.display = '';
+      m.img2.src = galleryExtras[1];
+      m.img2.alt = titleDisplay;
       if (galleryExtras.length >= 3) {
-        img3.parentElement.style.display = '';
-        img3.src = galleryExtras[2];
-        img3.alt = titleDisplay;
+        m.img3.parentElement.style.display = '';
+        m.img3.src = galleryExtras[2];
+        m.img3.alt = titleDisplay;
       } else {
-        img3.parentElement.style.display = 'none';
+        m.img3.parentElement.style.display = 'none';
       }
     }
   }
 
   // Related projects — random selection from same category, never the open card
   const t = translations[currentLang] || translations['al'];
-  const relatedLabel = document.getElementById('modalRelatedLabel');
-  relatedLabel.textContent = t.modalRelated || 'PUNIME TË TJERA';
-  const grid = document.getElementById('modalRelatedGrid');
+  m.relLabel.textContent = t.modalRelated || 'PUNIME TË TJERA';
+  const grid = m.relGrid;
   grid.innerHTML = '';
   const allCards = Array.from(document.querySelectorAll('.project-card'));
   // Build pool: same category, exclude current card — then shuffle for randomness
@@ -273,18 +289,18 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeProjectModal();
 });
 
-// Attach click handlers to all project cards
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('click', function(e) {
-    e.preventDefault();
-    openProjectModal(this);
-  });
+// Delegated click handler for all project cards (static + dynamically cloned)
+document.addEventListener('click', function(e) {
+  var card = e.target.closest('.project-card');
+  if (!card) return;
+  e.preventDefault();
+  openProjectModal(card);
 });
 
 // ========================
 // NAVIGATION
 // ========================
-const pages = ['home','punot','arkitekture','objekte','sherbime','kontakt'];
+const pages = ['home','punet','arkitekture','objekte','sherbime','ekspertize','kontakt'];
 let currentPage = 'home';
 
 // ── OVERLAY COLOUR SYSTEM ──────────────────────────────────────────────
@@ -345,7 +361,8 @@ function applyOverlayTheme(theme, skipHeader) {
 function updateHeaderForPage(pageId) {
   // Active nav link
   document.querySelectorAll('.header-nav a').forEach(a => a.classList.remove('active-page'));
-  const match = document.querySelector(`.header-nav a[data-page="${pageId}"]`);
+  var activePageId = (pageId === 'arkitekture' || pageId === 'objekte') ? 'punet' : pageId;
+  const match = document.querySelector(`.header-nav a[data-page="${activePageId}"]`);
   if (match) match.classList.add('active-page');
   // Colour at scroll top (y=55 — centre of the fixed symbols)
   const theme = _getThemeAtY(pageId, 55);
@@ -364,21 +381,14 @@ function navigateTo(pageId) {
   currentPage = pageId;
   updateHeaderForPage(pageId);
 
-  const portfolioSlide = ['arkitekture', 'objekte'];
-  const isSlide = false; // Unified transition for all page changes — consistent premium feel
-
   const oldEl = document.getElementById('page-' + prevPage);
   const newEl = document.getElementById('page-' + pageId);
 
-  // Pre-hide destination portfolio cards and simultaneously begin preloading
-  // their images so they are decoded and paint-ready by the time cards reveal.
   var destCards = null;
   var imgPreloadPromise = Promise.resolve();
 
   if (pageId === 'arkitekture' || pageId === 'objekte') {
     destCards = preInitPortfolio(pageId);
-    // Kick off image decoding for the first batch immediately — runs in parallel
-    // with the exit animation so images are ready when cards need to appear.
     var firstBatch = destCards.slice(0, PORTFOLIO_BATCH);
     imgPreloadPromise = Promise.all(firstBatch.map(function(card) {
       var img = card.querySelector('img');
@@ -390,72 +400,46 @@ function navigateTo(pageId) {
     }));
   }
 
-  // Helper: fires showBatch once images are ready OR after a max timeout,
-  // whichever comes first — never blocks more than 350ms.
   function revealCards() {
     var timeout = new Promise(function(r){ setTimeout(r, 350); });
     Promise.race([imgPreloadPromise, timeout]).then(function() {
       if (destCards) showBatch(pageId, destCards);
-      else if (pageId === 'punot') initPortfolio(pageId);
+      else if (pageId === 'punet') initPortfolio(pageId);
     });
   }
 
-  // Animate the cat-title in with its own entrance — fired right as the
-  // new page becomes visible so it feels bold and immediate.
   function enterCatTitle() {
     var title = newEl.querySelector('.cat-title');
     if (!title) return;
     title.classList.remove('title-entered');
-    // Force a reflow so the transition fires from the initial hidden state
     void title.offsetWidth;
     setTimeout(function() { title.classList.add('title-entered'); }, 60);
   }
 
-  if (isSlide) {
-    const goForward = portfolioSlide.indexOf(pageId) > portfolioSlide.indexOf(prevPage);
-    const exitClass  = goForward ? 'slide-exit-left'        : 'slide-exit-right';
-    const enterClass = goForward ? 'slide-enter-from-right' : 'slide-enter-from-left';
+  var scrollY = window.scrollY;
+  var vh = window.innerHeight;
+  var pageH = Math.max(oldEl.scrollHeight, vh);
+  var pct = Math.max(0, Math.min(100, Math.round(((scrollY + vh * 0.5) / pageH) * 100)));
+  oldEl.style.transformOrigin = 'center ' + pct + '%';
+  oldEl.classList.add('page-exiting');
 
-    oldEl.classList.add(exitClass);
-    setTimeout(function() {
-      oldEl.classList.remove('active', exitClass);
-      newEl.classList.add('active', enterClass);
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      enterCatTitle();
-      setTimeout(function() {
-        newEl.classList.add('no-enter-anim');
-        newEl.classList.remove(enterClass);
-        initScrollAnimations();
-        revealCards();
-      }, 260);
-    }, 300);
+  setTimeout(function() {
+    oldEl.classList.remove('active', 'page-exiting');
+    oldEl.style.transformOrigin = '';
+    newEl.classList.remove('no-enter-anim');
+    newEl.classList.add('active', 'page-entering');
+    window.scrollTo({ top: 0, behavior: 'instant' });
 
-  } else {
-    var scrollY = window.scrollY;
-    var vh = window.innerHeight;
-    var pageH = Math.max(oldEl.scrollHeight, vh);
-    var pct = Math.max(0, Math.min(100, Math.round(((scrollY + vh * 0.5) / pageH) * 100)));
-    oldEl.style.transformOrigin = 'center ' + pct + '%';
-    oldEl.classList.add('page-exiting');
+    if (pageId === 'punet') buildPunetGrid();
+    enterCatTitle();
 
     setTimeout(function() {
-      oldEl.classList.remove('active', 'page-exiting');
-      oldEl.style.transformOrigin = '';
-      newEl.classList.remove('no-enter-anim');
-      newEl.classList.add('active', 'page-entering');
-      window.scrollTo({ top: 0, behavior: 'instant' });
-
-      if (pageId === 'punot') buildPunotGrid();
-      enterCatTitle();
-
-      setTimeout(function() {
-        newEl.classList.remove('page-entering');
-        newEl.classList.add('no-enter-anim');
-        initScrollAnimations();
-        revealCards();
-      }, 260);
-    }, 280);
-  }
+      newEl.classList.remove('page-entering');
+      newEl.classList.add('no-enter-anim');
+      initScrollAnimations();
+      revealCards();
+    }, 260);
+  }, 280);
 }
 
 // ========================
@@ -562,250 +546,76 @@ function toggleType(item) {
 // ========================
 // FILE UPLOAD ZONE
 // ========================
-(function() {
-  const area = document.getElementById('uploadArea');
-  const input = document.getElementById('fileInput');
-  const fileList = document.getElementById('fileList');
-  const prompt = document.getElementById('uploadPrompt');
-  const addMoreBtn = document.getElementById('addMoreBtn');
-  // the parent form
-  const form = area ? area.closest('section').querySelector('form.contact-form-ws') : null;
+
+var UPLOAD_ALLOWED_EXTS = ['jpg','jpeg','png','heic','pdf','dwg','dxf'];
+var UPLOAD_MAX_SIZE = 10 * 1024 * 1024; // 10MB
+
+function extIcon(name) {
+  var ext = name.split('.').pop().toLowerCase();
+  if (['jpg','jpeg','png','heic'].includes(ext)) return '🖼️';
+  if (ext === 'pdf') return '📄';
+  if (['dwg','dxf'].includes(ext)) return '📐';
+  return '📎';
+}
+
+function initFileUpload(areaId, inputId, fileListId, promptId, addMoreBtnId, form) {
+  var area       = document.getElementById(areaId);
+  var input      = document.getElementById(inputId);
+  var fileList   = document.getElementById(fileListId);
+  var prompt     = document.getElementById(promptId);
+  var addMoreBtn = document.getElementById(addMoreBtnId);
 
   if (!area || !input || !form) return;
 
-  // DataTransfer to accumulate files
-  let dt = new DataTransfer();
-
-  function extIcon(name) {
-    const ext = name.split('.').pop().toLowerCase();
-    if (['jpg','jpeg','png','heic'].includes(ext)) return '🖼️';
-    if (ext === 'pdf') return '📄';
-    if (['dwg','dxf'].includes(ext)) return '📐';
-    return '📎';
-  }
-
-  function extLabel(name) {
-    return name.split('.').pop().toUpperCase();
-  }
+  var dt = new DataTransfer();
 
   function renderList() {
     fileList.innerHTML = '';
-    for (let i = 0; i < dt.files.length; i++) {
-      const f = dt.files[i];
-      const li = document.createElement('li');
-      li.innerHTML = `
-        <span class="file-icon">${extIcon(f.name)}</span>
-        <span class="file-info">
-          <span class="file-name">${f.name}</span>
-          <span class="file-type">${extLabel(f.name)} &mdash; ${(f.size/1024/1024).toFixed(2)} MB</span>
-        </span>
-        <button class="file-remove" type="button" data-idx="${i}" title="Hiq skedarin">✕</button>
-      `;
+    for (var i = 0; i < dt.files.length; i++) {
+      var f = dt.files[i];
+      var li = document.createElement('li');
+      li.innerHTML =
+        '<span class="file-icon">' + extIcon(f.name) + '</span>' +
+        '<span class="file-info">' +
+          '<span class="file-name">' + f.name + '</span>' +
+          '<span class="file-type">' + f.name.split('.').pop().toUpperCase() + ' &mdash; ' + (f.size/1024/1024).toFixed(2) + ' MB</span>' +
+        '</span>' +
+        '<button class="file-remove" type="button" data-idx="' + i + '" title="Hiq skedarin">✕</button>';
       fileList.appendChild(li);
     }
-    // remove buttons
-    fileList.querySelectorAll('.file-remove').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const idx = parseInt(this.dataset.idx);
-        const newDt = new DataTransfer();
-        for (let j = 0; j < dt.files.length; j++) {
-          if (j !== idx) newDt.items.add(dt.files[j]);
-        }
-        dt = newDt;
-        syncInput();
-        renderList();
-        updateUI();
-      });
-    });
   }
 
-  function syncInput() {
-    // Sync hidden input for form submission
-    const newInput = document.createElement('input');
-    // We'll use a FormData approach on submit instead; just keep dt up to date
-    input.files; // reference
-  }
-
-  function updateUI() {
-    if (dt.files.length === 0) {
-      prompt.style.display = '';
-      fileList.style.display = 'none';
-      addMoreBtn.style.display = 'none';
-    } else {
-      prompt.style.display = 'none';
-      fileList.style.display = '';
-      addMoreBtn.style.display = '';
+  // Use event delegation on fileList to avoid accumulating listeners
+  fileList.addEventListener('click', function(e) {
+    var btn = e.target.closest('.file-remove');
+    if (!btn) return;
+    e.stopPropagation();
+    var idx = parseInt(btn.dataset.idx);
+    var newDt = new DataTransfer();
+    for (var j = 0; j < dt.files.length; j++) {
+      if (j !== idx) newDt.items.add(dt.files[j]);
     }
-  }
-
-  var ALLOWED_EXTS = ['jpg','jpeg','png','heic','pdf','dwg','dxf'];
-  var MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-
-  function addFiles(newFiles) {
-    var rejected = [];
-    for (let i = 0; i < newFiles.length; i++) {
-      var f = newFiles[i];
-      var ext = f.name.split('.').pop().toLowerCase();
-      if (!ALLOWED_EXTS.includes(ext)) { rejected.push(f.name + ' (lloj i palejueshëm / unsupported type)'); continue; }
-      if (f.size > MAX_FILE_SIZE) { rejected.push(f.name + ' (max 10MB)'); continue; }
-      // avoid duplicates by name+size
-      let dup = false;
-      for (let j = 0; j < dt.files.length; j++) {
-        if (dt.files[j].name === f.name && dt.files[j].size === f.size) { dup = true; break; }
-      }
-      if (!dup) dt.items.add(f);
-    }
-    if (rejected.length) alert('Skedarët e mëposhtëm u refuzuan:\n' + rejected.join('\n'));
+    dt = newDt;
     renderList();
     updateUI();
-  }
-
-  // clicking the area triggers file picker (but not when clicking remove buttons or add-more)
-  area.addEventListener('click', function(e) {
-    if (e.target.closest('.file-remove') || e.target.closest('#addMoreBtn')) return;
-    input.click();
   });
-
-  // clicking the file input
-  input.addEventListener('change', function() {
-    addFiles(this.files);
-    // reset so same file can be re-added if removed
-    this.value = '';
-  });
-
-  // drag and drop
-  area.addEventListener('dragover', function(e) {
-    e.preventDefault();
-    area.classList.add('drag-over');
-  });
-  area.addEventListener('dragleave', function() {
-    area.classList.remove('drag-over');
-  });
-  area.addEventListener('drop', function(e) {
-    e.preventDefault();
-    area.classList.remove('drag-over');
-    addFiles(e.dataTransfer.files);
-  });
-
-  // intercept form submit to attach files
-  form.addEventListener('submit', function(e) {
-    if (dt.files.length === 0) return; // no extra files, submit normally
-
-    e.preventDefault();
-    const formData = new FormData(form);
-    // remove any existing attachments key and re-add all from dt
-    formData.delete('attachments[]');
-    for (let i = 0; i < dt.files.length; i++) {
-      formData.append('attachments[]', dt.files[i]);
-    }
-
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = currentLang==='en'?'Sending...':'Duke dërguar...';
-    submitBtn.disabled = true;
-
-    fetch(form.action, {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    }).then(res => {
-      if (res.ok) {
-        submitBtn.textContent = currentLang==='en'?'✓ Sent!':'✓ U dërgua!';
-        form.reset();
-        dt = new DataTransfer();
-        renderList();
-        updateUI();
-        setTimeout(() => { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 3500);
-      } else {
-        submitBtn.textContent = currentLang==='en'?'Error — try again':'Gabim — riprovo';
-        submitBtn.disabled = false;
-      }
-    }).catch(() => {
-      submitBtn.textContent = currentLang==='en'?'Error — try again':'Gabim — riprovo';
-      submitBtn.disabled = false;
-    });
-  });
-})();
-
-// ========================
-// FILE UPLOAD ZONE — KONTAKT PAGE
-// ========================
-(function() {
-  const area = document.getElementById('uploadAreaK');
-  const input = document.getElementById('fileInputK');
-  const fileList = document.getElementById('fileListK');
-  const prompt = document.getElementById('uploadPromptK');
-  const addMoreBtn = document.getElementById('addMoreBtnK');
-  const form = document.getElementById('ksContactForm');
-
-  if (!area || !input || !form) return;
-
-  let dt = new DataTransfer();
-
-  function extIcon(name) {
-    const ext = name.split('.').pop().toLowerCase();
-    if (['jpg','jpeg','png','heic'].includes(ext)) return '🖼️';
-    if (ext === 'pdf') return '📄';
-    if (['dwg','dxf'].includes(ext)) return '📐';
-    return '📎';
-  }
-  function extLabel(name) { return name.split('.').pop().toUpperCase(); }
-
-  function renderList() {
-    fileList.innerHTML = '';
-    for (let i = 0; i < dt.files.length; i++) {
-      const f = dt.files[i];
-      const li = document.createElement('li');
-      li.innerHTML = `
-        <span class="file-icon">${extIcon(f.name)}</span>
-        <span class="file-info">
-          <span class="file-name">${f.name}</span>
-          <span class="file-type">${extLabel(f.name)} &mdash; ${(f.size/1024/1024).toFixed(2)} MB</span>
-        </span>
-        <button class="file-remove" type="button" data-idx="${i}" title="Hiq skedarin">✕</button>
-      `;
-      fileList.appendChild(li);
-    }
-    fileList.querySelectorAll('.file-remove').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const idx = parseInt(this.dataset.idx);
-        const newDt = new DataTransfer();
-        for (let j = 0; j < dt.files.length; j++) {
-          if (j !== idx) newDt.items.add(dt.files[j]);
-        }
-        dt = newDt;
-        renderList();
-        updateUI();
-      });
-    });
-  }
 
   function updateUI() {
-    if (dt.files.length === 0) {
-      prompt.style.display = '';
-      fileList.style.display = 'none';
-      addMoreBtn.style.display = 'none';
-    } else {
-      prompt.style.display = 'none';
-      fileList.style.display = '';
-      addMoreBtn.style.display = '';
-    }
+    var hasFiles = dt.files.length > 0;
+    prompt.style.display     = hasFiles ? 'none' : '';
+    fileList.style.display   = hasFiles ? '' : 'none';
+    addMoreBtn.style.display = hasFiles ? '' : 'none';
   }
-
-  var ALLOWED_EXTS_K = ['jpg','jpeg','png','heic','pdf','dwg','dxf'];
-  var MAX_FILE_SIZE_K = 10 * 1024 * 1024; // 10MB
 
   function addFiles(newFiles) {
     var rejected = [];
-    for (let i = 0; i < newFiles.length; i++) {
+    for (var i = 0; i < newFiles.length; i++) {
       var f = newFiles[i];
       var ext = f.name.split('.').pop().toLowerCase();
-      if (!ALLOWED_EXTS_K.includes(ext)) { rejected.push(f.name + ' (lloj i palejueshëm / unsupported type)'); continue; }
-      if (f.size > MAX_FILE_SIZE_K) { rejected.push(f.name + ' (max 10MB)'); continue; }
-      let dup = false;
-      for (let j = 0; j < dt.files.length; j++) {
+      if (!UPLOAD_ALLOWED_EXTS.includes(ext)) { rejected.push(f.name + ' (lloj i palejueshëm / unsupported type)'); continue; }
+      if (f.size > UPLOAD_MAX_SIZE) { rejected.push(f.name + ' (max 10MB)'); continue; }
+      var dup = false;
+      for (var j = 0; j < dt.files.length; j++) {
         if (dt.files[j].name === f.name && dt.files[j].size === f.size) { dup = true; break; }
       }
       if (!dup) dt.items.add(f);
@@ -816,7 +626,7 @@ function toggleType(item) {
   }
 
   area.addEventListener('click', function(e) {
-    if (e.target.closest('.file-remove') || e.target.closest('#addMoreBtnK')) return;
+    if (e.target.closest('.file-remove') || e.target.closest('#' + addMoreBtnId)) return;
     input.click();
   });
 
@@ -836,36 +646,46 @@ function toggleType(item) {
   form.addEventListener('submit', function(e) {
     if (dt.files.length === 0) return;
     e.preventDefault();
-    const formData = new FormData(form);
+    var formData = new FormData(form);
     formData.delete('attachments[]');
-    for (let i = 0; i < dt.files.length; i++) { formData.append('attachments[]', dt.files[i]); }
+    for (var i = 0; i < dt.files.length; i++) { formData.append('attachments[]', dt.files[i]); }
 
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = currentLang==='en'?'Sending...':'Duke dërguar...';
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var originalText = submitBtn.textContent;
+    submitBtn.textContent = currentLang === 'en' ? 'Sending...' : 'Duke dërguar...';
     submitBtn.disabled = true;
 
-    fetch(form.action, {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    }).then(res => {
-      if (res.ok) {
-        submitBtn.textContent = currentLang==='en'?'✓ Sent!':'✓ U dërgua!';
-        form.reset();
-        dt = new DataTransfer();
-        renderList();
-        updateUI();
-        setTimeout(() => { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 3500);
-      } else {
-        submitBtn.textContent = currentLang==='en'?'Error — try again':'Gabim — riprovo';
+    fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })
+      .then(function(res) {
+        if (res.ok) {
+          submitBtn.textContent = currentLang === 'en' ? '✓ Sent!' : '✓ U dërgua!';
+          form.reset();
+          dt = new DataTransfer();
+          renderList();
+          updateUI();
+          setTimeout(function() { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 3500);
+        } else {
+          submitBtn.textContent = currentLang === 'en' ? 'Error — try again' : 'Gabim — riprovo';
+          submitBtn.disabled = false;
+        }
+      })
+      .catch(function() {
+        submitBtn.textContent = currentLang === 'en' ? 'Error — try again' : 'Gabim — riprovo';
         submitBtn.disabled = false;
-      }
-    }).catch(() => {
-      submitBtn.textContent = currentLang==='en'?'Error — try again':'Gabim — riprovo';
-      submitBtn.disabled = false;
-    });
+      });
   });
+}
+
+// Home page contact form upload
+(function() {
+  var area = document.getElementById('uploadArea');
+  var form = area ? area.closest('section').querySelector('form.contact-form-ws') : null;
+  initFileUpload('uploadArea', 'fileInput', 'fileList', 'uploadPrompt', 'addMoreBtn', form);
+})();
+
+// Kontakt page upload
+(function() {
+  initFileUpload('uploadAreaK', 'fileInputK', 'fileListK', 'uploadPromptK', 'addMoreBtnK', document.getElementById('ksContactForm'));
 })();
 
 // ========================
@@ -916,7 +736,7 @@ const translations = {
     btnPunet: 'PUNËT',
     btnExpertiza: 'SHËRBIMET',
     missionText: 'Prodhim me porosi i strukturave dhe objekteve prej çeliku. Çdo punë fillon me një bisedë — dhe mbaron kur ju jeni plotësisht të kënaqur.',
-    showMore: 'Shiko më shumë punë',
+    showMore: 'Për më shumë',
     servicesIntro: 'Nga shkallë spirale deri te skulptura metalike — çdo gjë kryhet brenda punishtjes sonë, pa ndërmjetës.',
     processLabel: 'PROCESI',
     processTitle: 'Si Punojmë',
@@ -936,7 +756,7 @@ const translations = {
     navExpertise: 'EKSPERTIZË', navContact: 'KONTAKT',
     mobileNavArch: 'Arkitekturë', mobileNavObj: 'Objekte',
     mobileNavServices: 'Shërbime', mobileNavExpertise: 'Ekspertizë', mobileNavContact: 'Kontakt',
-    footerNavProjects: 'PUNËT', footerNavServices: 'SHËRBIMET', footerNavContact: 'KONTAKT',
+    footerNavProjects: 'PUNËT', footerNavServices: 'SHËRBIMET', footerNavExpertise: 'EKSPERTIZË', footerNavContact: 'KONTAKT',
     footerTagline: 'Punime Metalike me Porosi · Custom Metalwork',
     footerCopyright: '© Work Steel që nga 2018',
     // ── PORTFOLIO ──
@@ -1012,10 +832,16 @@ const translations = {
     modalBack: '← KTHEHU TE PUNËT',
     modalYear: 'VITI', modalClient: 'KLIENTI', modalMaterial: 'MATERIALI', modalMaterialVal: 'Çelik',
     modalRelated: 'PUNIME TË TJERA',
-    punot_pageTitle: 'Punët',
-    punot_filterAll: 'Të Gjitha',
-    punot_filterArch: 'Arkitekturë',
-    punot_filterObj: 'Objekte',
+    punet_pageTitle: 'Punët',
+    punet_filterAll: 'Të Gjitha',
+    punet_filterArch: 'Shkallë',
+    punet_filterObj: 'Kangjella & Korimano',
+    punet_filterGates: 'Porta & Dyer',
+    punet_filterStructures: 'Struktura',
+    punet_filterInteriors: 'Arredim & Mobilje',
+    punet_filterDecor: 'Dekor & CNC',
+    punet_searchPlaceholder: 'Kërko punën...',
+    punet_recLabel: 'Për më shumë',
     // ── FAQ ──
     faqLabel: 'PYETJE TË SHPESHTA',
     faqHeading: 'Çfarë Duhet të Dini',
@@ -1074,7 +900,7 @@ const translations = {
     btnPunet: 'PROJECTS',
     btnExpertiza: 'SERVICES',
     missionText: 'Custom fabrication of steel structures and objects. Every job starts with a conversation — and ends when you are fully satisfied.',
-    showMore: 'View more projects',
+    showMore: 'To view more',
     servicesIntro: 'From spiral staircases to metal sculptures — everything made in our own workshop, without intermediaries.',
     processLabel: 'THE PROCESS',
     processTitle: 'How We Work',
@@ -1094,7 +920,7 @@ const translations = {
     navExpertise: 'EXPERTISE', navContact: 'CONTACT',
     mobileNavArch: 'Architecture', mobileNavObj: 'Objects',
     mobileNavServices: 'Services', mobileNavExpertise: 'Expertise', mobileNavContact: 'Contact',
-    footerNavProjects: 'PROJECTS', footerNavServices: 'SERVICES', footerNavContact: 'CONTACT',
+    footerNavProjects: 'PROJECTS', footerNavServices: 'SERVICES', footerNavExpertise: 'EXPERTISE', footerNavContact: 'CONTACT',
     footerTagline: 'Custom Metalwork · Punime me Porosi',
     footerCopyright: '© Work Steel since 2018',
     // ── PORTFOLIO ──
@@ -1170,10 +996,16 @@ const translations = {
     modalBack: '← RETURN TO PROJECTS',
     modalYear: 'YEAR', modalClient: 'CLIENT', modalMaterial: 'MATERIAL', modalMaterialVal: 'Steel',
     modalRelated: 'OTHER PROJECTS',
-    punot_pageTitle: 'Works',
-    punot_filterAll: 'All',
-    punot_filterArch: 'Architecture',
-    punot_filterObj: 'Objects',
+    punet_pageTitle: 'Works',
+    punet_filterAll: 'All',
+    punet_filterArch: 'Staircases',
+    punet_filterObj: 'Railings',
+    punet_filterGates: 'Gates & Doors',
+    punet_filterStructures: 'Structures',
+    punet_filterInteriors: 'Interiors & Furniture',
+    punet_filterDecor: 'Decorative & CNC',
+    punet_searchPlaceholder: 'Search works...',
+    punet_recLabel: 'For more',
     // ── FAQ ──
     faqLabel: 'FREQUENTLY ASKED',
     faqHeading: 'What You Should Know',
@@ -1241,9 +1073,10 @@ function switchLanguage(lang) {
     const pg = a.getAttribute('data-page');
     let label = '';
     if (pg === 'arkitekture') label = t.navArch;
-    else if (pg === 'objekte')    label = t.navObj;
-    else if (pg === 'sherbime')   label = t.navServices;
-    else if (pg === 'kontakt')    label = t.navContact;
+    else if (pg === 'objekte')      label = t.navObj;
+    else if (pg === 'sherbime')     label = t.navServices;
+    else if (pg === 'ekspertize')   label = t.navExpertise;
+    else if (pg === 'kontakt')      label = t.navContact;
     if (!label) return;
     a.textContent = label;
   });
@@ -1253,18 +1086,20 @@ function switchLanguage(lang) {
   const mob = document.querySelectorAll('#mobile-menu a[onclick]');
   mob.forEach(a => {
     const oc = a.getAttribute('onclick') || '';
-    if (oc.includes("'arkitekture'"))  a.textContent = t.mobileNavArch;
-    else if (oc.includes("'objekte'")) a.textContent = t.mobileNavObj;
-    else if (oc.includes("'sherbime'"))a.textContent = t.mobileNavServices;
-    else if (oc.includes("'kontakt'")) a.textContent = t.mobileNavContact;
+    if (oc.includes("'arkitekture'"))    a.textContent = t.mobileNavArch;
+    else if (oc.includes("'objekte'"))   a.textContent = t.mobileNavObj;
+    else if (oc.includes("'sherbime'"))  a.textContent = t.mobileNavServices;
+    else if (oc.includes("'ekspertize'"))a.textContent = t.mobileNavExpertise;
+    else if (oc.includes("'kontakt'"))   a.textContent = t.mobileNavContact;
   });
 
   // ── Footer nav (all footers) ──
   document.querySelectorAll('.footer-nav a[onclick]').forEach(a => {
     const oc = a.getAttribute('onclick') || '';
-    if (oc.includes("'arkitekture'"))  a.textContent = t.footerNavProjects;
-    else if (oc.includes("'sherbime'"))a.textContent = t.footerNavServices;
-    else if (oc.includes("'kontakt'")) a.textContent = t.footerNavContact;
+    if (oc.includes("'arkitekture'") || oc.includes("'punet'")) a.textContent = t.footerNavProjects;
+    else if (oc.includes("'sherbime'"))   a.textContent = t.footerNavServices;
+    else if (oc.includes("'ekspertize'")) a.textContent = t.footerNavExpertise;
+    else if (oc.includes("'kontakt'"))    a.textContent = t.footerNavContact;
   });
 
   // ── Footer tagline & copyright ──
@@ -1401,17 +1236,24 @@ function switchLanguage(lang) {
   if (objTitle) objTitle.textContent = t.objPageTitle;
 
   // ════════════════════════
-  //  PUNOT COMBINED PAGE
+  //  PUNET PAGE
   // ════════════════════════
-  const punotTitle = document.querySelector('#page-punot .cat-title');
-  if (punotTitle) punotTitle.innerHTML = '<em>' + t.punot_pageTitle + '</em>';
-  const punotFilterArch = document.getElementById('punot-filter-arch');
-  if (punotFilterArch) punotFilterArch.innerHTML = t.punot_filterArch;
-  const punotFilterObj = document.getElementById('punot-filter-obj');
-  if (punotFilterObj) punotFilterObj.innerHTML = t.punot_filterObj;
-  // Also update the show-more button on punot page
-  const punotSM = document.querySelector('#punot-show-more .btn-pill');
-  if (punotSM) punotSM.textContent = t.portfolioShowMore;
+  const punetTitle = document.querySelector('#page-punet .cat-title');
+  if (punetTitle) punetTitle.innerHTML = '<em>' + t.punet_pageTitle + '</em>';
+  const punetSM = document.querySelector('#punet-show-more .btn-pill');
+  if (punetSM) punetSM.textContent = t.portfolioShowMore;
+  const punetInp = document.getElementById('punet-search-input');
+  if (punetInp) punetInp.placeholder = t.punet_searchPlaceholder;
+  const punetRecLabel = document.getElementById('punet-rec-label');
+  if (punetRecLabel) punetRecLabel.textContent = t.punet_recLabel;
+  const punetChips = document.querySelectorAll('#punet-chips .punet-chip');
+  if (punetChips[0]) punetChips[0].textContent = t.punet_filterAll;
+  if (punetChips[1]) punetChips[1].textContent = t.punet_filterArch;
+  if (punetChips[2]) punetChips[2].textContent = t.punet_filterObj;
+  if (punetChips[3]) punetChips[3].textContent = t.punet_filterGates;
+  if (punetChips[4]) punetChips[4].textContent = t.punet_filterStructures;
+  if (punetChips[5]) punetChips[5].textContent = t.punet_filterInteriors;
+  if (punetChips[6]) punetChips[6].textContent = t.punet_filterDecor;
 
   document.querySelectorAll('.filter-label').forEach(el => el.textContent = t.portfolioFilterLabel);
 
@@ -1487,13 +1329,30 @@ function switchLanguage(lang) {
   });
 
   // ════════════════════════
+  //  EKSPERTIZË PAGE
+  // ════════════════════════
+  const expT = document.querySelector('#page-ekspertize .exp-hero-title em');
+  if (expT) expT.textContent = t.expHeroTitle;
+  const expHL = document.querySelector('#page-ekspertize .exp-hero-label');
+  if (expHL) expHL.textContent = t.expHeroLabel;
+
+  const expTexts = document.querySelectorAll('#page-ekspertize .exp-hero-text p');
+  if (t.expHeroTexts) t.expHeroTexts.forEach((txt, i) => { if (expTexts[i]) expTexts[i].textContent = txt; });
+
+  const expAccTitles = document.querySelectorAll('#page-ekspertize .exp-accordion-title');
+  if (t.expAccordionTitles) t.expAccordionTitles.forEach((ti, i) => { if (expAccTitles[i]) expAccTitles[i].textContent = ti; });
+
+  const expAccBodies = document.querySelectorAll('#page-ekspertize .exp-accordion-body p');
+  if (t.expAccordionBodies) t.expAccordionBodies.forEach((bd, i) => { if (expAccBodies[i]) expAccBodies[i].textContent = bd; });
+
+  const expGuidLbl = document.querySelector('#page-ekspertize .guiding-section .section-label');
+  if (expGuidLbl) expGuidLbl.textContent = t.guidingLabel;
+  const expGuidStmt = document.querySelector('#page-ekspertize .guiding-statement');
+  if (expGuidStmt) expGuidStmt.innerHTML = t.guidingStatement;
+
+  // ════════════════════════
   //  KONTAKT PAGE
   // ════════════════════════
-  const ktT = document.querySelector('#page-kontakt .exp-hero-title');
-  if (ktT) ktT.textContent = t.kontaktHeroTitle;
-  const ktHL = document.querySelector('#page-kontakt .exp-hero-label');
-  if (ktHL) ktHL.textContent = t.kontaktHeroLabel || (lang === 'en' ? 'Get in Touch' : 'Na Kontaktoni');
-
   const ktTL = document.querySelector('#page-kontakt .contact-types-left .section-label');
   if (ktTL) ktTL.textContent = t.contactTypesLabel;
 
@@ -1508,11 +1367,6 @@ function switchLanguage(lang) {
     if (mEl) mEl.textContent = mo;
     if (dEl) dEl.textContent = de;
   });
-
-  const guidLbl = document.querySelector('#page-kontakt .guiding-section .section-label');
-  if (guidLbl) guidLbl.textContent = t.guidingLabel;
-  const guidStmt = document.querySelector('#page-kontakt .guiding-statement');
-  if (guidStmt) guidStmt.innerHTML = t.guidingStatement;
 
   const ktSL = document.querySelector('#page-kontakt .ks-contact-section .section-label');
   if (ktSL) ktSL.textContent = t.kontaktSectionLabel;
@@ -1828,34 +1682,137 @@ function toggleAccordion(item) {
 // ========================
 // PORTFOLIO PAGINATION + COUNTER
 // ========================
-var portfolioShown = { arkitekture: 0, objekte: 0, punot: 0 };
+var portfolioShown = { arkitekture: 0, objekte: 0, punet: 0 };
 var PORTFOLIO_BATCH = 6;
 
-function buildPunotGrid() {
-  var grid = document.getElementById('punot-grid');
+function buildPunetGrid() {
+  var grid = document.getElementById('punet-grid');
   if (!grid) return;
   grid.innerHTML = '';
 
-  // Clone all project cards from arch and obj pages
   var archCards = Array.from(document.querySelectorAll('#page-arkitekture .cat-grid .project-card'));
   var objCards  = Array.from(document.querySelectorAll('#page-objekte .cat-grid .project-card'));
   var allCards  = archCards.concat(objCards);
 
   allCards.forEach(function(card) {
     var clone = card.cloneNode(true);
-    // Reset display state — initPortfolio will control visibility
     clone.classList.add('hidden-project');
     clone.style.display = 'none';
     grid.appendChild(clone);
   });
 
-  // Attach click handlers to the new clones
-  grid.querySelectorAll('.project-card').forEach(function(card) {
-    card.addEventListener('click', function(e) {
-      e.preventDefault();
-      openProjectModal(this);
-    });
+  // Reset search/filter state on every entry
+  punetSearchState.query = '';
+  punetSearchState.cat = 'all';
+  var inp = document.getElementById('punet-search-input');
+  if (inp) inp.value = '';
+  var clr = document.getElementById('punet-search-clear');
+  if (clr) clr.style.display = 'none';
+  var rec = document.getElementById('punet-recommendations');
+  if (rec) rec.style.display = 'none';
+  document.querySelectorAll('#punet-chips .punet-chip').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.cat === 'all');
   });
+}
+
+// ========================
+// PUNET SEARCH + FILTER
+// ========================
+var punetSearchState = { query: '', cat: 'all' };
+
+function searchPunet(val) {
+  punetSearchState.query = val.trim().toLowerCase();
+  var clr = document.getElementById('punet-search-clear');
+  if (clr) clr.style.display = punetSearchState.query ? '' : 'none';
+  applyPunetFilter();
+}
+
+function clearPunetSearch() {
+  punetSearchState.query = '';
+  var inp = document.getElementById('punet-search-input');
+  if (inp) inp.value = '';
+  var clr = document.getElementById('punet-search-clear');
+  if (clr) clr.style.display = 'none';
+  applyPunetFilter();
+}
+
+function filterPunetCat(cat, btn) {
+  punetSearchState.cat = cat;
+  document.querySelectorAll('#punet-chips .punet-chip').forEach(function(b) {
+    b.classList.toggle('active', b === btn);
+  });
+  applyPunetFilter();
+}
+
+function applyPunetFilter() {
+  var grid = document.getElementById('punet-grid');
+  if (!grid) return;
+  var q   = punetSearchState.query;
+  var cat = punetSearchState.cat;
+
+  var allCards = Array.from(grid.querySelectorAll('.project-card'));
+  var matched = [], unmatched = [];
+
+  allCards.forEach(function(card) {
+    var titleAl = (card.dataset.titleAl || '').toLowerCase();
+    var titleEn = (card.dataset.titleEn || '').toLowerCase();
+    var descAl  = (card.dataset.descAl  || '').toLowerCase();
+    var descEn  = (card.dataset.descEn  || '').toLowerCase();
+    var cardCat = card.dataset.categoryAl || '';
+
+    var cardCats = (card.dataset.cats || cardCat).split(',').map(function(s){ return s.trim(); });
+    var catMatch = (cat === 'all') || cardCats.some(function(c){ return c === cat; });
+    var qMatch   = !q || titleAl.includes(q) || titleEn.includes(q) || descAl.includes(q) || descEn.includes(q);
+
+    if (catMatch && qMatch) matched.push(card);
+    else unmatched.push(card);
+  });
+
+  // Show matched, hide unmatched
+  unmatched.forEach(function(c) { c.style.display = 'none'; c.classList.remove('visible','card-enter'); });
+  matched.forEach(function(c, i) {
+    c.classList.remove('hidden-project', 'card-exit');
+    c.style.display = '';
+    c.style.opacity = '0';
+    setTimeout(function() {
+      c.style.opacity = '';
+      c.classList.add('card-enter', 'visible');
+      setTimeout(function() { c.classList.remove('card-enter'); }, 400);
+    }, i * 40);
+  });
+
+  // Update counter
+  var curEl = document.getElementById('punet-counter-current');
+  var totEl = document.getElementById('punet-counter-total');
+  if (curEl) curEl.textContent = matched.length;
+  if (totEl) totEl.textContent = matched.length;
+
+  // Hide show-more when filtering/searching
+  var btnWrap = document.getElementById('punet-show-more');
+  if (btnWrap) btnWrap.style.display = (q || cat !== 'all') ? 'none' : (allCards.length > PORTFOLIO_BATCH ? '' : 'none');
+
+  // Recommendations: show cards from unmatched set when there's a query
+  renderPunetRecommendations(q ? unmatched : []);
+}
+
+function renderPunetRecommendations(pool) {
+  var wrap = document.getElementById('punet-recommendations');
+  var recGrid = document.getElementById('punet-rec-grid');
+  if (!wrap || !recGrid) return;
+
+  if (!pool.length) { wrap.style.display = 'none'; return; }
+
+  var picks = pool.slice(0, 4);
+  recGrid.innerHTML = '';
+  picks.forEach(function(card) {
+    var clone = card.cloneNode(true);
+    clone.style.display = '';
+    clone.style.opacity = '';
+    clone.classList.remove('hidden-project', 'card-exit', 'card-enter');
+    recGrid.appendChild(clone);
+  });
+
+  wrap.style.display = '';
 }
 
 // Hides all cards on a portfolio page and resets the batch counter.
@@ -1881,10 +1838,10 @@ function preInitPortfolio(pageId) {
   if (controls) controls.classList.remove('controls-visible');
 
   // Update counters / show-more button
-  var prefix = pageId === 'arkitekture' ? 'arch' : pageId === 'objekte' ? 'obj' : 'punot';
+  var prefix = pageId === 'arkitekture' ? 'arch' : pageId === 'objekte' ? 'obj' : 'punet';
   var totalEl = document.getElementById(prefix + '-counter-total');
   if (totalEl) totalEl.textContent = total;
-  var btnId = pageId === 'arkitekture' ? 'arch-show-more' : pageId === 'objekte' ? 'obj-show-more' : 'punot-show-more';
+  var btnId = pageId === 'arkitekture' ? 'arch-show-more' : pageId === 'objekte' ? 'obj-show-more' : 'punet-show-more';
   var btnWrap = document.getElementById(btnId);
   if (btnWrap) btnWrap.style.display = total > PORTFOLIO_BATCH ? '' : 'none';
 
@@ -1919,12 +1876,12 @@ function showBatch(pageId, allCards) {
   portfolioShown[pageId] = end;
 
   // Update counter value
-  var prefix = pageId === 'arkitekture' ? 'arch' : pageId === 'objekte' ? 'obj' : 'punot';
+  var prefix = pageId === 'arkitekture' ? 'arch' : pageId === 'objekte' ? 'obj' : 'punet';
   var curEl = document.getElementById(prefix + '-counter-current');
   if (curEl) curEl.textContent = end;
 
   // Show/hide "show more" button
-  var btnId = pageId === 'arkitekture' ? 'arch-show-more' : pageId === 'objekte' ? 'obj-show-more' : 'punot-show-more';
+  var btnId = pageId === 'arkitekture' ? 'arch-show-more' : pageId === 'objekte' ? 'obj-show-more' : 'punet-show-more';
   var btnWrap = document.getElementById(btnId);
   if (btnWrap) {
     var remaining = allCards.length - end;
@@ -1972,11 +1929,11 @@ window.addEventListener('load', function() {
 // Init both portfolio counters on first load (home is default active page)
 document.addEventListener('DOMContentLoaded', function() {
   // Pre-calculate totals and ensure controls bars start hidden on all portfolio pages
-  ['arkitekture','objekte','punot'].forEach(function(pid) {
+  ['arkitekture','objekte','punet'].forEach(function(pid) {
     var page = document.getElementById('page-' + pid);
     if (!page) return;
     var total = page.querySelectorAll('.cat-grid .project-card').length;
-    var prefix = pid === 'arkitekture' ? 'arch' : pid === 'objekte' ? 'obj' : 'punot';
+    var prefix = pid === 'arkitekture' ? 'arch' : pid === 'objekte' ? 'obj' : 'punet';
     var totalEl = document.getElementById(prefix + '-counter-total');
     if (totalEl) totalEl.textContent = total;
     // Controls bar starts hidden — only revealed by showBatch
@@ -2011,8 +1968,10 @@ window.addEventListener('load', function() {
     if (splash) splash.classList.add('hidden');
   }, 1500);
   // Init portfolio if a portfolio page is the initial active page
-  ['arkitekture','objekte'].forEach(function(pid) {
-    if (document.getElementById('page-' + pid) && document.getElementById('page-' + pid).classList.contains('active')) {
+  ['arkitekture','objekte','punet'].forEach(function(pid) {
+    var pg = document.getElementById('page-' + pid);
+    if (pg && pg.classList.contains('active')) {
+      if (pid === 'punet') buildPunetGrid();
       initPortfolio(pid);
     }
   });
@@ -2135,9 +2094,7 @@ window.addEventListener('load', function() {
     });
   }
 
-  // Run on page load and whenever navigateTo fires
   initWordReveal();
-  var _origNavigateTo = window.navigateTo;
   if (typeof navigateTo === 'function') {
     var _origNav = navigateTo;
     window.navigateTo = function(pageId) {
