@@ -16,7 +16,7 @@ const PROJECTS_DATA = [
   {id:"P15",titleAl:"Dyer industriale, panele sanduici, dhe strukture celiku",titleEn:"Industrial Doors, with sandwich panels and steel frame",descAl:"Dyer industriale, panele sandwich dhe strukturë çeliku - sistem i plotë fasade për ambiente industriale me izolim dhe funksionalitet.",descEn:"Industrial doors, sandwich insulation panels, and steel frame - a complete facade system delivering insulation and functionality for industrial environments.",cats:"Porta & Dyer,Fasada,Struktura",year:2020,thumb:"fotot-compressed/P15/15.1.webp",gallery:["fotot-compressed/P15/15.1.webp", "fotot-compressed/P15/15.2.webp", "fotot-compressed/P15/15.3.webp", "fotot-compressed/P15/15.4.webp", "fotot-compressed/P15/15.5.webp", "fotot-compressed/P15/15.6.webp", "fotot-compressed/P15/15.7.webp", "fotot-compressed/P15/15.8.webp"]},
   {id:"P16",titleAl:"Ballkon me kangjell e farketuar me dekorime artizanale",titleEn:"Artistic Wrought Iron Balcony Railing",descAl:"Kangjellë ballkoni e farkëtuar me dekorime artizanale - çdo detaj i punuar me dorë për të krijuar karakter dhe elegancë të qëndrueshme.",descEn:"Wrought iron balcony railing with artisanal decorations - every detail hand-crafted to create lasting character and elegance.",cats:"Kangjella & Korimano,Dekor & CNC",year:2020,thumb:"fotot-compressed/P16/16.1.webp",gallery:["fotot-compressed/P16/16.1.webp", "fotot-compressed/P16/16.2.webp", "fotot-compressed/P16/16.3.webp", "fotot-compressed/P16/16.4.webp"]},
   {id:"P17",titleAl:"Veshje Muri Dekorative",titleEn:"Decorative Wall Cladding",descAl:"Veshje muri nga dyshemeja deri në tavan për brenda një ambienti luksoz.",descEn:"Floor-to-ceiling wall facade inside a luxury residential interior.",cats:"Fasada,Dekor & CNC",year:2020,thumb:"fotot-compressed/P17/17.1.webp",gallery:["fotot-compressed/P17/17.1.webp"]},
-  {id:"P18",titleAl:"Shkalle Celiku me Dru dhe Metal",titleEn:"Steel Staircase with Wood and Metal",descAl:"Shkalle industriale, per ambiente te brendshme, per zyra ose/dhe duplex",descEn:"Industrial-grade steel staircase designed for interior office environments and duplex apartments.",cats:"Shkalle",year:2020,thumb:"fotot-compressed/P18/18.1.webp",gallery:["fotot-compressed/P18/18.1.webp", "fotot-compressed/P18/18.2.webp", "fotot-compressed/P18/18.3.webp", "fotot-compressed/P18/18.4.webp", "fotot-compressed/P18/18.5.webp", "fotot-compressed/P18/18.6.webp", "fotot-compressed/P18/18.7.webp", "fotot-compressed/P18/18.8.webp", "fotot-compressed/P18/18.9.webp", "fotot-compressed/P18/18.10.webp"]},
+  {id:"P18",titleAl:"Shkalle Celiku me Dru dhe Metal",titleEn:"Steel Staircase with Wood and Metal",descAl:"Shkalle industriale, per ambiente te brendshme, per zyra ose/dhe duplex",descEn:"Industrial-grade steel staircase designed for interior office environments and duplex apartments.",cats:"Shkalle",year:2020,thumb:"fotot-compressed/P18/18.2.webp",gallery:["fotot-compressed/P18/18.2.webp", "fotot-compressed/P18/18.3.webp", "fotot-compressed/P18/18.4.webp", "fotot-compressed/P18/18.5.webp", "fotot-compressed/P18/18.6.webp", "fotot-compressed/P18/18.7.webp", "fotot-compressed/P18/18.8.webp", "fotot-compressed/P18/18.9.webp", "fotot-compressed/P18/18.10.webp", "fotot-compressed/P18/18.11.webp"]},
   {id:"P19",titleAl:"Prerje dekorative me precizion ne CNC",titleEn:"",descAl:"Prerje dekorative me precizion CNC - dizajne të sofistikuara të gdhendura me lazer në metal për efekt vizual maksimal.",descEn:"Precision CNC decorative cutting - intricate laser-engraved metal designs that deliver maximum visual impact.",cats:"Dekor & CNC",year:2022,thumb:"fotot-compressed/P19/19.1.webp",gallery:["fotot-compressed/P19/19.1.webp"]},
   {id:"P20",titleAl:"Kangjella te jashtme per hotele dhe pallate",titleEn:"Outer railing for hotels and buildings",descAl:"Kangjella të jashtme për hotele dhe pallate - konstruksion i fortë çeliku me dizajn të pastër për fasada të mëdha rezidenciale dhe hoteliere.",descEn:"Exterior railings for hotels and apartment buildings - robust steel construction with clean design for large residential and hospitality facades.",cats:"Kangjella & Korimano",year:2021,thumb:"fotot-compressed/P20/20.1.webp",gallery:["fotot-compressed/P20/20.1.webp", "fotot-compressed/P20/20.2.webp", "fotot-compressed/P20/20.3.webp", "fotot-compressed/P20/20.4.webp", "fotot-compressed/P20/20.5.webp"]},
   {id:"P21",titleAl:"Kangjella te jashtme per hotele dhe pallate",titleEn:"Outer railing for hotels and buildings",descAl:"Kangjella të jashtme për hotele dhe pallate - linja të pastra dhe material rezistent për hapësira publike me trafik të lartë.",descEn:"Exterior railings for hotels and buildings - clean lines and durable steel material built for high-traffic public spaces.",cats:"Kangjella & Korimano",year:2021,thumb:"fotot-compressed/P21/21.1.webp",gallery:["fotot-compressed/P21/21.1.webp", "fotot-compressed/P21/21.2.webp", "fotot-compressed/P21/21.3.webp", "fotot-compressed/P21/21.4.webp"]},
@@ -40,7 +40,7 @@ const PROJECTS_DATA = [
   {id:"P40",titleAl:"Kangjella Shkallesh me Motive valëzuese",titleEn:"Wavy Motif Staircase Railing",descAl:"kangjella te brendshme te farketuara, te punuara me dore",descEn:"Hand-forged interior railings, crafted by hand with artisanal detail and timeless character.",cats:"Kangjella & Korimano,Dekor & CNC",year:2019,thumb:"fotot-compressed/P40/40.1.webp",gallery:["fotot-compressed/P40/40.1.webp", "fotot-compressed/P40/40.2.webp", "fotot-compressed/P40/40.3.webp", "fotot-compressed/P40/40.4.webp", "fotot-compressed/P40/40.5.webp", "fotot-compressed/P40/40.6.webp", "fotot-compressed/P40/40.7.webp", "fotot-compressed/P40/40.8.webp", "fotot-compressed/P40/40.9.mp4"]},
   {id:"P41",titleAl:"Porte Metalike me Panel Dru Kompozit",titleEn:"Metal Gate with Composite Wood Panel",descAl:"MDF (kompresimi I drurit) I nderthurur me strukture metalike, biblioteke",descEn:"Custom library unit combining MDF compressed wood panels interwoven with a steel structural frame.",cats:"Porta & Dyer,Dekor & CNC",year:2023,thumb:"fotot-compressed/P41/41.1.webp",gallery:["fotot-compressed/P41/41.1.webp", "fotot-compressed/P41/41.2.webp"]},
   {id:"P42",titleAl:"Kangjella Shkallesh me Motiv Luleje",titleEn:"Floral Motif Staircase Railing",descAl:"kangjella te farketuara, me detaje te holla",descEn:"Hand-forged railings with fine ornamental details, where every curve reflects mastery and craftsmanship.",cats:"Kangjella & Korimano,Dekor & CNC",year:2019,thumb:"fotot-compressed/P42/42.1.webp",gallery:["fotot-compressed/P42/42.1.webp", "fotot-compressed/P42/42.2.webp", "fotot-compressed/P42/42.3.mp4", "fotot-compressed/P42/42.4.mp4"]},
-  {id:"P43",titleAl:"Zgjidhje e plote e jashtme metalurgjike",titleEn:"Complete Exterior Metalwork",descAl:"kangjella rrethimi, edhe der e jashtme skorever me telekomand. Dhe dere e vogel per kembesoret",descEn:"Perimeter fence with a remote-controlled sliding gate and a separate pedestrian entry door - security and elegance in one.",cats:"Porta & Dyer,Kangjella & Korimano",year:2021,thumb:"fotot-compressed/P43/43.1.webp",gallery:["fotot-compressed/P43/43.1.webp", "fotot-compressed/P43/43.2.webp", "fotot-compressed/P43/43.3.webp", "fotot-compressed/P43/43.4.webp", "fotot-compressed/P43/43.5.webp", "fotot-compressed/P43/43.6.webp"]},
+  {id:"P43",titleAl:"Zgjidhje e plote e jashtme metalurgjike",titleEn:"Complete Exterior Metalwork",descAl:"kangjella rrethimi, edhe der e jashtme skorever me telekomand. Dhe dere e vogel per kembesoret",descEn:"Perimeter fence with a remote-controlled sliding gate and a separate pedestrian entry door - security and elegance in one.",cats:"Porta & Dyer,Kangjella & Korimano",year:2021,thumb:"fotot-compressed/P43/43.5.webp",gallery:["fotot-compressed/P43/43.5.webp", "fotot-compressed/P43/43.1.webp", "fotot-compressed/P43/43.2.webp", "fotot-compressed/P43/43.3.webp", "fotot-compressed/P43/43.4.webp", "fotot-compressed/P43/43.6.webp"]},
   {id:"P44",titleAl:"Ndarje Hapsirash",titleEn:"Space seperator",descAl:"Ndarese hapsire lokali e bere me prerje me lazer cnc, bashke me logon e lokalit.",descEn:"CNC laser-cut interior space divider featuring the venue's logo - functional design that doubles as a branded statement piece.",cats:"Dekor & CNC,Arredim & Mobilje",year:2022,thumb:"fotot-compressed/P44/44.1.webp",gallery:["fotot-compressed/P44/44.1.webp", "fotot-compressed/P44/44.2.webp", "fotot-compressed/P44/44.3.webp"]},
   {id:"P45",titleAl:"Kangjella te brendshme vile.",titleEn:"Interior Vertical Railings",descAl:"Kangjella të brendshme vertikale për vilë - linja të holla dhe të pastra që ndajnë hapësirat me elegancë.",descEn:"Interior vertical railings for a villa - slim, clean lines that divide spaces with understated elegance.",cats:"Kangjella & Korimano",year:2020,thumb:"fotot-compressed/P45/45.1.webp",gallery:["fotot-compressed/P45/45.1.webp", "fotot-compressed/P45/45.2.mp4", "fotot-compressed/P45/45.3.mp4"]},
   {id:"P46",titleAl:"Porte Rreshqitese Automatike",titleEn:"Automatic Sliding Gate",descAl:"Porte e jashtme me telekomande, prezence, dhe hyrje kryesore per kembesoret.",descEn:"Automated exterior gate with remote control and presence sensor, paired with a dedicated pedestrian entry - seamless access, premium security.",cats:"Porta & Dyer",year:2022,thumb:"fotot-compressed/P46/46.1.webp",gallery:["fotot-compressed/P46/46.1.webp", "fotot-compressed/P46/46.2.mp4"]},
@@ -48,15 +48,15 @@ const PROJECTS_DATA = [
   {id:"P48",titleAl:"Render të ndryshëm",titleEn:"Rendered projects",descAl:"Punime te ndryshme ne render, deshira dhe fantazia juaj juaj, kthimi jon ne realitet",descEn:"Custom rendered steel works - your vision, your imagination, brought to life with precision and craftsmanship.",cats:"Dekor & CNC",year:2023,thumb:"fotot-compressed/P48/48.1.webp",gallery:["fotot-compressed/P48/48.1.webp", "fotot-compressed/P48/48.2.webp", "fotot-compressed/P48/48.3.webp", "fotot-compressed/P48/48.4.webp", "fotot-compressed/P48/48.5.webp", "fotot-compressed/P48/48.6.webp", "fotot-compressed/P48/48.7.webp", "fotot-compressed/P48/48.8.webp", "fotot-compressed/P48/48.9.webp", "fotot-compressed/P48/48.10.webp", "fotot-compressed/P48/48.11.webp"]},
   {id:"P50",titleAl:"Reklame e Jashtme",titleEn:"Business Displaying board",descAl:"Reklame Korten per veterinarin \"Vet Hospital, Liqeni I thate\"",descEn:"Corten steel signage crafted for Vet Hospital - raw, weathered aesthetics with lasting structural integrity.",cats:"Dekor & CNC",year:2024,thumb:"fotot-compressed/P50/50.1.webp",gallery:["fotot-compressed/P50/50.1.webp", "fotot-compressed/P50/50.2.webp", "fotot-compressed/P50/53.3.webp", "fotot-compressed/P50/53.4.webp"]},
   {id:"P51",titleAl:"Hije parkimi",titleEn:"Parking shade",descAl:"Dizanj modern, parkim I jashtem, per hijezim per makina",descEn:"Modern outdoor car canopy structure, designed to provide shade and weather protection with a clean architectural profile.",cats:"Struktura,Fasada",year:2023,thumb:"fotot-compressed/P51/51.1.webp",gallery:["fotot-compressed/P51/51.1.webp", "fotot-compressed/P51/51.2.webp", "fotot-compressed/P51/51.3.webp"]},
-  {id:"P52",titleAl:"Ndertese Industriale Celiku",titleEn:"Industrial Steel Building",descAl:"Ndërtesë industriale çeliku - skelet i plotë metalik i projektuar dhe montuar për qëndrueshmëri maksimale dhe përdorim afatgjatë.",descEn:"Industrial steel building - full metal frame designed and assembled for maximum structural integrity and long-term use.",cats:"Struktura",year:2022,thumb:"fotot-compressed/P52/52.1.webp",gallery:["fotot-compressed/P52/52.1.webp", "fotot-compressed/P52/52.2.webp", "fotot-compressed/P52/52.3.webp", "fotot-compressed/P52/52.4.webp", "fotot-compressed/P52/52.5.webp", "fotot-compressed/P52/52.6.webp", "fotot-compressed/P52/52.7.webp", "fotot-compressed/P52/52.8.webp", "fotot-compressed/P52/52.9.webp", "fotot-compressed/P52/52.10.webp", "fotot-compressed/P52/52.11.webp"]},
+  {id:"P52",titleAl:"Ndertese Industriale Celiku",titleEn:"Industrial Steel Building",descAl:"Ndërtesë industriale çeliku - skelet i plotë metalik i projektuar dhe montuar për qëndrueshmëri maksimale dhe përdorim afatgjatë.",descEn:"Industrial steel building - full metal frame designed and assembled for maximum structural integrity and long-term use.",cats:"Struktura",year:2022,thumb:"fotot-compressed/P52/52.5.webp",gallery:["fotot-compressed/P52/52.5.webp", "fotot-compressed/P52/52.1.webp", "fotot-compressed/P52/52.2.webp", "fotot-compressed/P52/52.3.webp", "fotot-compressed/P52/52.4.webp", "fotot-compressed/P52/52.6.webp", "fotot-compressed/P52/52.7.webp", "fotot-compressed/P52/52.8.webp", "fotot-compressed/P52/52.9.webp", "fotot-compressed/P52/52.10.webp", "fotot-compressed/P52/52.11.webp"]},
   {id:"P53",titleAl:"Shkalle Spirale Celiku",titleEn:"Steel Spiral Staircase",descAl:"Elikoidal, shkalle e brendshme metalike spirale",descEn:"Helical interior spiral staircase - a flowing steel sculpture that commands attention in any space.",cats:"Shkalle",year:2021,thumb:"fotot-compressed/P53/53.1.webp",gallery:["fotot-compressed/P53/53.1.webp", "fotot-compressed/P53/53.2.webp", "fotot-compressed/P53/53.3.webp", "fotot-compressed/P53/53.4.mp4", "fotot-compressed/P53/53.5.mp4"]},
   {id:"P54",titleAl:"Baze Tavoline Celiku Forme X",titleEn:"Steel Table Base X-Shape",descAl:"Bazament tavoline bronz",descEn:"Bronze-finish steel table base - a statement piece that merges industrial strength with warm, luxury aesthetics.",cats:"Arredim & Mobilje",year:2023,thumb:"fotot-compressed/P54/54.1.webp",gallery:["fotot-compressed/P54/54.1.webp", "fotot-compressed/P54/54.2.webp", "fotot-compressed/P54/54.3.webp", "fotot-compressed/P54/54.4.webp"]},
   {id:"P55",titleAl:"Zgjidhje e plote e jashtme metalurgjike",titleEn:"Complete Exterior Metalwork",descAl:"Krijimi I dizanjeve dekorative per vila si ne shqiperi, dhe ne itali. Porta te blinduara me element xhami. Kangjella dekorative, Dere e jashtme makine me telekomand, dhe dere e vogel e jashtme per njerzit.",descEn:"Premium decorative villa works for projects in Albania and Italy - armored doors with glass, ornamental railings, remote-controlled vehicle gates, and pedestrian entries.",cats:"Porta & Dyer,Kangjella & Korimano,Dekor & CNC",year:2020,thumb:"fotot-compressed/P55/55.1.webp",gallery:["fotot-compressed/P55/55.1.webp", "fotot-compressed/P55/55.2.webp", "fotot-compressed/P55/55.3.webp", "fotot-compressed/P55/55.4.webp", "fotot-compressed/P55/55.5.webp", "fotot-compressed/P55/55.6.webp", "fotot-compressed/P55/55.7.webp"]},
-  {id:"P56",titleAl:"Shkalle emergjence",titleEn:"Emergency Stairs",descAl:"Parapet (mbrojteset anesore) I shkalleve emergjente",descEn:"Emergency staircase parapet railings - built to safety standards without compromising on clean, industrial design.",cats:"Shkalle,Kangjella & Korimano",year:2021,thumb:"fotot-compressed/P56/56.1.webp",gallery:["fotot-compressed/P56/56.1.webp", "fotot-compressed/P56/56.2.webp", "fotot-compressed/P56/56.3.webp", "fotot-compressed/P56/56.4.webp", "fotot-compressed/P56/56.5.webp", "fotot-compressed/P56/56.6.webp"]},
+  {id:"P56",titleAl:"Shkalle emergjence",titleEn:"Emergency Stairs",descAl:"Parapet (mbrojteset anesore) I shkalleve emergjente",descEn:"Emergency staircase parapet railings - built to safety standards without compromising on clean, industrial design.",cats:"Shkalle,Kangjella & Korimano",year:2021,thumb:"fotot-compressed/P56/56.4.webp",gallery:["fotot-compressed/P56/56.4.webp", "fotot-compressed/P56/56.1.webp", "fotot-compressed/P56/56.2.webp", "fotot-compressed/P56/56.3.webp", "fotot-compressed/P56/56.5.webp", "fotot-compressed/P56/56.6.webp"]},
   {id:"P57",titleAl:"Porte garazhdi industriale",titleEn:"Industrial Grade Gate",descAl:"Portë garazhi industriale - ndërtuar për ambiente pune intensive me mekanizëm rezistent dhe hapje funksionale.",descEn:"Industrial garage gate - built for heavy-duty work environments with a durable mechanism and reliable operation.",cats:"Porta & Dyer",year:2022,thumb:"fotot-compressed/P57/57.1.webp",gallery:["fotot-compressed/P57/57.1.webp", "fotot-compressed/P57/57.2.webp"]},
   {id:"P58",titleAl:"Strukture metalike dhe druri",titleEn:"Metal and wood construction",descAl:"kontinjer e kthyer ne shtepi me verante siper + shkalle te jashtme ne mal te zi.",descEn:"Shipping container converted into a home with a rooftop veranda and exterior steel staircase - built in Montenegro.",cats:"Struktura,Shkalle",year:2023,thumb:"fotot-compressed/P58/58.1.webp",gallery:["fotot-compressed/P58/58.1.webp"]},
   {id:"P59",titleAl:"Kormiano e jashtme",titleEn:"Outer railing",descAl:"Korimano e jashtme çeliku - e thjeshtë, e fortë, dhe e projektuar të qëndrojë në çdo kusht mjedisi.",descEn:"Exterior steel handrail - simple, strong, and built to withstand any environmental condition.",cats:"Kangjella & Korimano",year:2022,thumb:"fotot-compressed/P59/59.1.webp",gallery:["fotot-compressed/P59/59.1.webp", "fotot-compressed/P59/59.2.webp"]},
-  {id:"P60",titleAl:"Rimodelim dyqani",titleEn:"Remodeling work",descAl:"Rimodelim i plotë dyqani me elementë çeliku - transformim hapësire komerciale me dizajn të ri dhe funksionalitet të rritur.",descEn:"Full shop remodeling with steel elements - a commercial space transformed with a fresh design and improved functionality.",cats:"Arredim & Mobilje",year:2023,thumb:"fotot-compressed/P60/60.1.webp",gallery:["fotot-compressed/P60/60.1.webp", "fotot-compressed/P60/60.2.webp", "fotot-compressed/P60/60.3.webp"]},
+  {id:"P60",titleAl:"Rimodelim dyqani",titleEn:"Remodeling work",descAl:"Rimodelim i plotë dyqani me elementë çeliku - transformim hapësire komerciale me dizajn të ri dhe funksionalitet të rritur.",descEn:"Full shop remodeling with steel elements - a commercial space transformed with a fresh design and improved functionality.",cats:"Arredim & Mobilje",year:2023,thumb:"fotot-compressed/P60/60.3.webp",gallery:["fotot-compressed/P60/60.3.webp", "fotot-compressed/P60/60.1.webp", "fotot-compressed/P60/60.2.webp"]},
   {id:"P61",titleAl:"Dere e jashtme metalike dhe xhami",titleEn:"Steel and glass outer door",descAl:"Derë e jashtme metalike dhe xhami - kombinim i strukturës çeliku me panel xhami për pamje moderne dhe ndriçim natyral.",descEn:"Exterior steel and glass door - combining a steel frame with glass panels for a modern look and natural light flow.",cats:"Porta & Dyer",year:2022,thumb:"fotot-compressed/P61/61.1.webp",gallery:["fotot-compressed/P61/61.1.webp", "fotot-compressed/P61/61.2.mp4"]},
   {id:"P62",titleAl:"Mbajtese disqesh",titleEn:"Wheel Holder",descAl:"Mbajtëse diskësh metalike - element funksional i punuar me çelik për ruajtje dhe ekspozim të sigurt.",descEn:"Steel wheel/disc holder - a functional metal element for safe and organized storage and display.",cats:"Arredim & Mobilje",year:2024,thumb:"fotot-compressed/P62/62.1.webp",gallery:["fotot-compressed/P62/62.1.webp"]},
   {id:"P63",titleAl:"Shkalle dhe korimano",titleEn:"Stairs and railing",descAl:"Shkallë dhe korimano çeliku - sistem i plotë shkallësh me korimano të integruara për siguri dhe dizajn koherent.",descEn:"Steel staircase with integrated railing - a complete stair system where safety and design work as one.",cats:"Shkalle,Kangjella & Korimano",year:2021,thumb:"fotot-compressed/P63/63.1.webp",gallery:["fotot-compressed/P63/63.1.webp", "fotot-compressed/P63/63.3.webp"]},
@@ -252,33 +252,75 @@ function getModalEls() {
     client:     document.getElementById('modalClient'),
     mainImg:    document.getElementById('modalMainImg'),
     gallery:    document.getElementById('modalGallery'),
-    img1:       document.getElementById('modalGalleryImg1'),
-    img2:       document.getElementById('modalGalleryImg2'),
-    img3:       document.getElementById('modalGalleryImg3'),
+    strip:      document.getElementById('modalGalleryStrip'),
+    prev:       document.getElementById('modalGalleryPrev'),
+    next:       document.getElementById('modalGalleryNext'),
+    counter:    document.getElementById('modalGalleryCounter'),
     relLabel:   document.getElementById('modalRelatedLabel'),
     relGrid:    document.getElementById('modalRelatedGrid'),
   };
-  _modalEls.gallerySec = _modalEls.gallery ? _modalEls.gallery.querySelector('.project-modal-gallery-secondary') : null;
   return _modalEls;
 }
 
-// Pool of gallery images to cycle through
-const galleryPool = [
-  'fotot-compressed/P37/37.3.webp',
-  'fotot-compressed/P128/128.1.webp',
-  'fotot-compressed/P56/56.3.webp',
-  'fotot-compressed/P109/109.1.webp',
-  'fotot-compressed/P105/105.1.webp',
-  'fotot-compressed/P115/115.1.webp',
-  'fotot-compressed/P140/140.1.webp',
-  'fotot-compressed/P43/43.5.webp',
-];
+var _galleryItems = [];
+var _galleryIndex = 0;
 
-function pickGalleryImgs(mainSrc) {
-  // Pick 3 from pool that aren't the main image
-  const pool = galleryPool.filter(s => !mainSrc.includes(s.split('/').pop()));
-  const shuffled = pool.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, 3);
+function buildModalGallery(items, alt) {
+  var m = getModalEls();
+  _galleryItems = items;
+  _galleryIndex = 0;
+  m.strip.innerHTML = '';
+  items.forEach(function(src, i) {
+    var isVideo = /\.mp4$/i.test(src);
+    var el;
+    if (isVideo) {
+      el = document.createElement('video');
+      el.src = src;
+      el.autoplay = true;
+      el.muted = true;
+      el.loop = true;
+      el.setAttribute('playsinline', '');
+    } else {
+      el = document.createElement('img');
+      el.src = src;
+      el.alt = alt;
+      el.loading = 'lazy';
+      el.decoding = 'async';
+    }
+    el.className = 'modal-gallery-media';
+    el.dataset.index = i;
+    el.addEventListener('click', function() { setGalleryIndex(i); });
+    m.strip.appendChild(el);
+  });
+  updateGalleryState();
+}
+
+function setGalleryIndex(idx) {
+  _galleryIndex = idx;
+  updateGalleryState();
+}
+
+function updateGalleryState() {
+  var m = getModalEls();
+  var items = m.strip.querySelectorAll('.modal-gallery-media');
+  items.forEach(function(el, i) {
+    el.classList.toggle('active', i === _galleryIndex);
+  });
+  m.counter.textContent = (_galleryIndex + 1) + ' / ' + _galleryItems.length;
+  m.prev.disabled = _galleryIndex === 0;
+  m.next.disabled = _galleryIndex === _galleryItems.length - 1;
+  // Scroll active item into view
+  if (items[_galleryIndex]) {
+    items[_galleryIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+}
+
+function modalGalleryPrev() {
+  if (_galleryIndex > 0) setGalleryIndex(_galleryIndex - 1);
+}
+
+function modalGalleryNext() {
+  if (_galleryIndex < _galleryItems.length - 1) setGalleryIndex(_galleryIndex + 1);
 }
 
 function openProjectModal(card) {
@@ -320,27 +362,14 @@ function openProjectModal(card) {
   m.mainImg.src          = mainImgSrc;
   m.mainImg.alt          = titleDisplay;
 
-  // Gallery section — show only if there are extra photos beyond cover
+  // Gallery section — dynamic, shows all images/videos
   if (!galleryExtras || galleryExtras.length === 0) {
     m.gallery.style.display = 'none';
   } else {
     m.gallery.style.display = '';
-    m.img1.src = galleryExtras[0];
-    m.img1.alt = titleDisplay;
-    if (galleryExtras.length === 1) {
-      m.gallerySec.style.display = 'none';
-    } else {
-      m.gallerySec.style.display = '';
-      m.img2.src = galleryExtras[1];
-      m.img2.alt = titleDisplay;
-      if (galleryExtras.length >= 3) {
-        m.img3.parentElement.style.display = '';
-        m.img3.src = galleryExtras[2];
-        m.img3.alt = titleDisplay;
-      } else {
-        m.img3.parentElement.style.display = 'none';
-      }
-    }
+    buildModalGallery(galleryExtras, titleDisplay);
+    m.prev.onclick = modalGalleryPrev;
+    m.next.onclick = modalGalleryNext;
   }
 
   // Related projects — random selection from same category, never the open card
@@ -421,9 +450,28 @@ window.addEventListener('popstate', function(e) {
   }
 });
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeProjectModal();
+document.addEventListener('keydown', function(e) {
+  var modal = document.getElementById('projectModal');
+  if (!modal || !modal.classList.contains('open')) return;
+  if (e.key === 'Escape') { closeProjectModal(); return; }
+  if (e.key === 'ArrowLeft')  { modalGalleryPrev(); return; }
+  if (e.key === 'ArrowRight') { modalGalleryNext(); return; }
 });
+
+// Touch swipe on gallery strip
+(function() {
+  var touchStartX = 0;
+  document.addEventListener('touchstart', function(e) {
+    var strip = document.getElementById('modalGalleryStrip');
+    if (strip && strip.contains(e.target)) touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    var strip = document.getElementById('modalGalleryStrip');
+    if (!strip || !strip.contains(e.target)) return;
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) { dx < 0 ? modalGalleryNext() : modalGalleryPrev(); }
+  }, { passive: true });
+})();
 
 // Delegated click handler for all project cards (static + dynamically cloned)
 document.addEventListener('click', function(e) {
@@ -546,7 +594,7 @@ function navigateTo(pageId) {
     newEl.classList.add('active', 'page-entering');
     window.scrollTo({ top: 0, behavior: 'instant' });
 
-    if (pageId === 'punet') buildPunetGrid();
+    if (pageId === 'punet') { buildPunetGrid(); resetPunetPage(); }
     enterCatTitle();
 
     setTimeout(function() {
@@ -760,23 +808,27 @@ function initFileUpload(areaId, inputId, fileListId, promptId, addMoreBtnId, for
   });
 
   form.addEventListener('submit', function(e) {
-    if (dt.files.length === 0) return;
     e.preventDefault();
-    var formData = new FormData(form);
-    formData.delete('attachments[]');
-    for (var i = 0; i < dt.files.length; i++) { formData.append('attachments[]', dt.files[i]); }
-
     var submitBtn = form.querySelector('button[type="submit"]');
     var originalText = submitBtn.textContent;
     submitBtn.textContent = currentLang === 'en' ? 'Sending...' : 'Duke dërguar...';
     submitBtn.disabled = true;
 
-    fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })
+    // Sync custom file picker files into the real input so Netlify receives them
+    var fileInput = input;
+    var container = new DataTransfer();
+    for (var i = 0; i < dt.files.length; i++) container.items.add(dt.files[i]);
+    fileInput.files = container.files;
+
+    var formData = new FormData(form);
+
+    fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData })
       .then(function(res) {
         if (res.ok) {
           submitBtn.textContent = currentLang === 'en' ? '✓ Sent!' : '✓ U dërgua!';
           form.reset();
           dt = new DataTransfer();
+          fileInput.files = new DataTransfer().files;
           renderList();
           updateUI();
           setTimeout(function() { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 3500);
@@ -1716,54 +1768,97 @@ function filterCatAndNavigate(targetPage) {
 }
 
 // Home page: in-place animated filter (no page navigation)
-function filterHomePortfolio(cat) {
-  var grid = document.querySelector('#page-home .portfolio-grid');
-  if (!grid) return;
+var HOME_PORTFOLIO_CAT = 'all';
 
-  // Update active state on sidebar links
+function buildHomePortfolio() {
+  var grid = document.getElementById('home-portfolio-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  var catMap = {
+    shkalle:  'Shkalle',
+    kangjella:'Kangjella & Korimano',
+    dekor:    'Dekor & CNC',
+    struktura:'Struktura',
+    fasada:   'Fasada',
+    porta:    'Porta & Dyer',
+    arredim:  'Arredim & Mobilje'
+  };
+
+  var HOME_FEATURED_IDS = ['P18','P33','P43','P52','P60','P56'];
+
+  var filtered;
+  if (HOME_PORTFOLIO_CAT === 'all') {
+    // Show the 6 curated featured projects in order
+    filtered = HOME_FEATURED_IDS.map(function(id) {
+      return PROJECTS_DATA.find(function(p) { return p.id === id; });
+    }).filter(Boolean);
+  } else {
+    var catLabel = catMap[HOME_PORTFOLIO_CAT] || '';
+    filtered = PROJECTS_DATA.filter(function(p) {
+      return p.cats.split(',').some(function(c) { return c.trim() === catLabel; });
+    }).slice(0, 6);
+  }
+
+  filtered.forEach(function(p) {
+    var card = document.createElement('div');
+    card.className = 'project-card fade-up';
+    card.dataset.titleAl   = p.titleAl;
+    card.dataset.titleEn   = p.titleEn;
+    card.dataset.descAl    = p.descAl;
+    card.dataset.descEn    = p.descEn;
+    card.dataset.year      = p.year;
+    card.dataset.categoryAl = p.cats.split(',')[0].trim();
+    card.dataset.gallery   = JSON.stringify(p.gallery);
+
+    var catDisplay = p.cats.split(',')[0].trim();
+    card.innerHTML =
+      '<div class="project-card-img">' +
+        '<img src="' + p.thumb + '" alt="' + p.titleAl + ' - Work Steel" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">' +
+        '<div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>' +
+        '<span class="expand-icon">↗</span>' +
+      '</div>' +
+      '<div class="project-info">' +
+        '<p class="project-title">' + p.titleAl + '</p>' +
+        '<p class="project-meta">' + catDisplay + ' · ' + p.year + '</p>' +
+      '</div>';
+
+    card.addEventListener('click', function() { openProjectModal(card); });
+    grid.appendChild(card);
+  });
+
+  // "See more" button
+  var more = document.createElement('div');
+  more.className = 'portfolio-more';
+  more.innerHTML = '<a class="btn-pill" onclick="navigateTo(\'punet\')">Shiko më shumë punë</a>';
+  grid.appendChild(more);
+
+  // Re-run scroll animations so new cards fade in
+  setTimeout(initScrollAnimations, 50);
+}
+
+function filterHomePortfolio(cat) {
+  HOME_PORTFOLIO_CAT = cat;
+
   document.querySelectorAll('#page-home .portfolio-sidebar .filter-item').forEach(function(a) {
     a.classList.remove('active');
     if (a.dataset.filterCat === cat) a.classList.add('active');
   });
 
-  var cards = Array.from(grid.querySelectorAll('.project-card'));
-  var toExit = [], toEnter = [];
+  var grid = document.getElementById('home-portfolio-grid');
+  if (!grid) return;
 
-  cards.forEach(function(card) {
-    var cardCat = card.dataset.cat || '';
-    var isVisible = card.style.display !== 'none';
-    var matches = (cat === 'all') || (cardCat === cat);
-    if (isVisible && !matches) toExit.push(card);
-    if (!isVisible && matches) toEnter.push(card);
-  });
-
-  // Animate non-matching cards out
-  toExit.forEach(function(card, i) {
-    card.style.animationDelay = (i * 0.05) + 's';
-    card.classList.remove('card-enter');
+  // Fade out existing cards, then rebuild
+  var existing = Array.from(grid.querySelectorAll('.project-card'));
+  existing.forEach(function(card, i) {
+    card.style.animationDelay = (i * 0.04) + 's';
     card.classList.add('card-exit');
-    setTimeout(function() {
-      card.style.display = 'none';
-      card.style.animationDelay = '';
-      card.classList.remove('card-exit');
-    }, 420 + i * 50);
   });
 
-  // Animate matching cards in after exit clears
-  var enterAfter = toExit.length > 0 ? 360 : 0;
-  toEnter.forEach(function(card, i) {
-    setTimeout(function() {
-      card.style.display = '';
-      card.style.animationDelay = (i * 0.05) + 's';
-      void card.offsetWidth; // force reflow so animation restarts
-      card.classList.remove('card-exit');
-      card.classList.add('card-enter');
-      setTimeout(function() {
-        card.classList.remove('card-enter');
-        card.style.animationDelay = '';
-      }, 450 + i * 50);
-    }, enterAfter);
-  });
+  var delay = existing.length > 0 ? 350 : 0;
+  setTimeout(function() {
+    buildHomePortfolio();
+  }, delay);
 }
 
 function toggleAccordion(item) {
@@ -1783,7 +1878,7 @@ var PORTFOLIO_BATCH = 6;
 function buildPunetGrid() {
   var grid = document.getElementById('punet-all-grid');
   if (!grid) return;
-  if (grid.children.length > 0) return; // already built
+  if (grid.children.length > 0) return; // already built; reset via resetPunetPage on re-entry
 
   PROJECTS_DATA.forEach(function(p) {
     var card = document.createElement('div');
@@ -1796,18 +1891,24 @@ function buildPunetGrid() {
     card.dataset.categoryAl = p.cats.split(',')[0].trim();
     card.dataset.year       = p.year;
     card.dataset.gallery    = JSON.stringify(p.gallery);
+    var catDisplay = p.cats.split(',')[0].trim();
     card.innerHTML =
-      '<div class="card-img-wrap"><img src="' + p.thumb + '" alt="' + p.titleAl.replace(/"/g,'&quot;') + '" loading="lazy" decoding="async"></div>' +
-      '<div class="card-body">' +
-        '<span class="card-cat">' + p.cats.split(',')[0].trim() + '</span>' +
-        '<h3 class="card-title" data-al="' + p.titleAl.replace(/"/g,'&quot;') + '" data-en="' + p.titleEn.replace(/"/g,'&quot;') + '">' + p.titleAl + '</h3>' +
-        '<p class="card-desc" data-al="' + p.descAl.replace(/"/g,'&quot;') + '" data-en="' + p.descEn.replace(/"/g,'&quot;') + '">' + p.descAl + '</p>' +
+      '<div class="project-card-img">' +
+        '<img src="' + p.thumb + '" alt="' + p.titleAl.replace(/"/g,'&quot;') + ' - Work Steel" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">' +
+        '<div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>' +
+        '<span class="expand-icon">↗</span>' +
+      '</div>' +
+      '<div class="project-info">' +
+        '<p class="project-title" data-al="' + p.titleAl.replace(/"/g,'&quot;') + '" data-en="' + p.titleEn.replace(/"/g,'&quot;') + '">' + p.titleAl + '</p>' +
+        '<p class="project-meta">' + catDisplay + ' · ' + p.year + '</p>' +
       '</div>';
     card.addEventListener('click', function() { openProjectModal(card); });
     grid.appendChild(card);
   });
 
-  // Reset search/filter state on every entry
+}
+
+function resetPunetPage() {
   punetSearchState.query = '';
   punetSearchState.cat = 'all';
   var inp = document.getElementById('punet-search-input');
@@ -1816,8 +1917,13 @@ function buildPunetGrid() {
   if (clr) clr.style.display = 'none';
   var rec = document.getElementById('punet-recommendations');
   if (rec) rec.style.display = 'none';
+  // Reset chip active states
   document.querySelectorAll('#punet-chips .punet-chip').forEach(function(btn) {
     btn.classList.toggle('active', btn.dataset.cat === 'all');
+  });
+  // Reset sidebar active states
+  document.querySelectorAll('#page-punet .punet-browser-sidebar .filter-item').forEach(function(a) {
+    a.classList.toggle('active', a.dataset.filterCat === 'all');
   });
   applyPunetFilter();
 }
@@ -1847,6 +1953,22 @@ function filterPunetCat(cat, btn) {
   punetSearchState.cat = cat;
   document.querySelectorAll('#punet-chips .punet-chip').forEach(function(b) {
     b.classList.toggle('active', b === btn);
+  });
+  // Sync sidebar
+  document.querySelectorAll('#page-punet .punet-browser-sidebar .filter-item').forEach(function(a) {
+    a.classList.toggle('active', a.dataset.filterCat === cat);
+  });
+  applyPunetFilter();
+}
+
+function punetSidebarFilter(cat, el) {
+  punetSearchState.cat = cat;
+  document.querySelectorAll('#page-punet .punet-browser-sidebar .filter-item').forEach(function(a) {
+    a.classList.toggle('active', a === el);
+  });
+  // Sync chips
+  document.querySelectorAll('#punet-chips .punet-chip').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.cat === cat);
   });
   applyPunetFilter();
 }
@@ -2033,6 +2155,9 @@ window.addEventListener('load', function() {
 
 // Init both portfolio counters on first load (home is default active page)
 document.addEventListener('DOMContentLoaded', function() {
+  // Build the home portfolio grid from PROJECTS_DATA
+  buildHomePortfolio();
+
   // Pre-calculate totals and ensure controls bars start hidden on all portfolio pages
   // Controls bar starts hidden — only revealed by showBatch
   var punetPage = document.getElementById('page-punet');

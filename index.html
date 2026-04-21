@@ -516,54 +516,8 @@ function declineCookies(){
         <a class="filter-item fade-left" onclick="filterHomePortfolio('porta')" data-filter-cat="porta" style="transition-delay:0.3s;">Porta & Dyer</a>
         <a class="filter-item fade-left" onclick="filterHomePortfolio('arredim')" data-filter-cat="arredim" style="transition-delay:0.35s;">Arredim & Mobilje</a>
       </div>
-      <div class="portfolio-grid">
-        <div class="project-card fade-up" data-cat="shkalle">
-          <div class="project-card-img">
-            <img src="fotot-compressed/P18/18.1.webp" alt="Shkallë çeliku me dru dhe metal - Work Steel" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
-            <div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>
-            <span class="expand-icon">↗</span>
-          </div>
-          <div class="project-info">
-            <p class="project-title">Shkallë Çeliku</p>
-            <p class="project-meta">Shkallë · 2020</p>
-          </div>
-        </div>
-        <div class="project-card fade-up" data-cat="kangjella">
-          <div class="project-card-img">
-            <img src="fotot-compressed/P1/1.1.webp" alt="Kangjella dekorative me korimano - Work Steel" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
-            <div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>
-            <span class="expand-icon">↗</span>
-          </div>
-          <div class="project-info">
-            <p class="project-title">Kangjella Dekorative</p>
-            <p class="project-meta">Kangjella & Korimano · 2018</p>
-          </div>
-        </div>
-        <div class="project-card fade-up" data-cat="porta">
-          <div class="project-card-img">
-            <img src="fotot-compressed/P6/6.1.webp" alt="Portë dekorative çeliku - Work Steel" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
-            <div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>
-            <span class="expand-icon">↗</span>
-          </div>
-          <div class="project-info">
-            <p class="project-title">Portë Dekorative</p>
-            <p class="project-meta">Porta & Dyer · 2019</p>
-          </div>
-        </div>
-        <div class="project-card fade-up" data-cat="arredim">
-          <div class="project-card-img">
-            <img src="fotot-compressed/P7/7.1.webp" alt="Arredim banaku bari - Work Steel" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
-            <div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>
-            <span class="expand-icon">↗</span>
-          </div>
-          <div class="project-info">
-            <p class="project-title">Arredim Bari</p>
-            <p class="project-meta">Arredim & Mobilje · 2019</p>
-          </div>
-        </div>
-        <div class="portfolio-more">
-          <a class="btn-pill" onclick="navigateTo('punet')">Shiko më shumë punë</a>
-        </div>
+      <div class="portfolio-grid" id="home-portfolio-grid">
+        <!-- populated by JS: buildHomePortfolio() -->
       </div>
     </div>
   </section>
@@ -783,10 +737,12 @@ function declineCookies(){
         <span class="section-label">KONTAKTO</span>
         <h2 class="section-heading playfair" style="margin-bottom:48px; font-size:clamp(32px,3.5vw,52px);">Na Kontaktoni</h2>
         <p class="form-intro" id="home-form-intro" style="color:rgba(245,240,235,0.7);font-size:14px;margin-bottom:24px;max-width:520px;line-height:1.6;">Gati për të filluar projektin tuaj? Na dërgoni mesazhin tuaj me foto dhe skica. Ju përgjigjemi brenda 24 orëve me një afat kohor dhe vlerësim çmimi.</p>
-        <form class="contact-form-ws" action="https://formspree.io/f/xpzvkjqr" method="POST" enctype="multipart/form-data" onsubmit="if(typeof gtag==='function'){gtag('event','generate_lead',{form_name:'contact_form_al'});} if(typeof fbq==='function'){fbq('track','Lead');}">
-          <input type="hidden" name="_subject" value="Mesazh i ri nga Work Steel Website">
-          <!-- Honeypot: hidden from humans, bots fill it in and get rejected -->
-          <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <form class="contact-form-ws" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" onsubmit="if(typeof gtag==='function'){gtag('event','generate_lead',{form_name:'contact_form_al'});} if(typeof fbq==='function'){fbq('track','Lead');}">
+          <input type="hidden" name="access_key" value="e4fdc740-cf98-4002-a6a5-be9f4e8865ed">
+          <input type="hidden" name="subject" value="Kërkesë e re nga Work Steel Website">
+          <input type="hidden" name="from_name" value="Work Steel Website">
+          <input type="text" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="file" id="fileInput" name="attachments" accept=".jpg,.jpeg,.png,.heic,.pdf,.dwg,.dxf" multiple style="display:none;">
           <div class="form-group">
             <label for="ws-name" data-i18n="formName">Emri i plotë</label>
             <input id="ws-name" type="text" name="name" required placeholder="p.sh. John Doe" data-placeholder-al="p.sh. John Doe" data-placeholder-en="e.g. John Smith" autocomplete="name">
@@ -811,7 +767,6 @@ function declineCookies(){
         </form>
       </div>
       <div class="upload-area" id="uploadArea">
-        <input type="file" id="fileInput" name="attachments[]" accept=".jpg,.jpeg,.png,.heic,.pdf,.dwg,.dxf" multiple style="display:none;">
         <div id="uploadPrompt">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:rgba(201,169,110,0.55);margin-bottom:14px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           <p>Shtoni skedarë këtu</p>
@@ -926,17 +881,18 @@ function declineCookies(){
       <aside class="punet-browser-sidebar">
         <div class="punet-search-wrap">
           <svg class="punet-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input class="punet-search-input" id="punet-search" type="text" placeholder="Kërko punime…" oninput="punetSearch(this.value)" autocomplete="off">
+          <input class="punet-search-input" id="punet-search-input" type="text" placeholder="Kërko punime…" oninput="searchPunet(this.value)" autocomplete="off">
+          <button class="punet-search-clear" id="punet-search-clear" onclick="clearPunetSearch()" style="display:none;" aria-label="Pastro">✕</button>
         </div>
-        <span class="filter-label" style="margin-top:32px;">KATEGORITË</span>
-        <a class="filter-item active" data-filter-cat="all" onclick="punetFilterCat('all')">Të gjitha</a>
-        <a class="filter-item" data-filter-cat="shkalle" onclick="punetFilterCat('shkalle')">Shkallë</a>
-        <a class="filter-item" data-filter-cat="kangjella" onclick="punetFilterCat('kangjella')">Kangjella &amp; Korimano</a>
-        <a class="filter-item" data-filter-cat="dekor" onclick="punetFilterCat('dekor')">Dekor &amp; CNC</a>
-        <a class="filter-item" data-filter-cat="struktura" onclick="punetFilterCat('struktura')">Strukturë</a>
-        <a class="filter-item" data-filter-cat="fasada" onclick="punetFilterCat('fasada')">Fasadë</a>
-        <a class="filter-item" data-filter-cat="porta" onclick="punetFilterCat('porta')">Porta &amp; Dyer</a>
-        <a class="filter-item" data-filter-cat="arredim" onclick="punetFilterCat('arredim')">Arredim &amp; Mobilje</a>
+        <span class="filter-label">FILTRO SIPAS</span>
+        <a class="filter-item active" data-filter-cat="all" onclick="punetSidebarFilter('all',this)">Të gjitha</a>
+        <a class="filter-item" data-filter-cat="Shkalle" onclick="punetSidebarFilter('Shkalle',this)">Shkallë</a>
+        <a class="filter-item" data-filter-cat="Kangjella &amp; Korimano" onclick="punetSidebarFilter('Kangjella &amp; Korimano',this)">Kangjella &amp; Korimano</a>
+        <a class="filter-item" data-filter-cat="Dekor &amp; CNC" onclick="punetSidebarFilter('Dekor &amp; CNC',this)">Dekor &amp; CNC</a>
+        <a class="filter-item" data-filter-cat="Struktura" onclick="punetSidebarFilter('Struktura',this)">Strukturë</a>
+        <a class="filter-item" data-filter-cat="Fasada" onclick="punetSidebarFilter('Fasada',this)">Fasadë</a>
+        <a class="filter-item" data-filter-cat="Porta &amp; Dyer" onclick="punetSidebarFilter('Porta &amp; Dyer',this)">Porta &amp; Dyer</a>
+        <a class="filter-item" data-filter-cat="Arredim &amp; Mobilje" onclick="punetSidebarFilter('Arredim &amp; Mobilje',this)">Arredim &amp; Mobilje</a>
       </aside>
 
       <!-- Grid -->
@@ -956,7 +912,7 @@ function declineCookies(){
             </div>
           </div>
           <div class="portfolio-controls-action">
-            <div id="punet-show-more"><a class="btn-pill" onclick="punetShowMore()">SHFAQ MË SHUMË</a></div>
+            <div id="punet-show-more"><a class="btn-pill" onclick="showMoreProjects('punet')">SHFAQ MË SHUMË</a></div>
           </div>
         </div>
       </div>
@@ -1016,9 +972,9 @@ function declineCookies(){
         <a class="filter-item fade-left" onclick="navigateTo('arredim')" style="transition-delay:0.35s;">Arredim &amp; Mobilje</a>
       </div>
       <div class="cat-grid">
-        <div class="project-card fade-up" data-title-al="Shkalle Celiku me Dru dhe Metal" data-title-en="Steel Staircase with Wood and Metal" data-desc-al="Shkalle industriale, per ambiente te brendshme, per zyra ose/dhe duplex" data-desc-en="Industrial-grade steel staircase designed for interior office environments and duplex apartments." data-year="2020" data-category-al="Shkallë" data-gallery='["fotot-compressed/P18/18.10.webp", "fotot-compressed/P18/18.2.webp", "fotot-compressed/P18/18.3.webp"]'>
+        <div class="project-card fade-up" data-title-al="Shkalle Celiku me Dru dhe Metal" data-title-en="Steel Staircase with Wood and Metal" data-desc-al="Shkalle industriale, per ambiente te brendshme, per zyra ose/dhe duplex" data-desc-en="Industrial-grade steel staircase designed for interior office environments and duplex apartments." data-year="2020" data-category-al="Shkallë" data-gallery='["fotot-compressed/P18/18.2.webp", "fotot-compressed/P18/18.3.webp", "fotot-compressed/P18/18.4.webp", "fotot-compressed/P18/18.5.webp", "fotot-compressed/P18/18.6.webp", "fotot-compressed/P18/18.7.webp", "fotot-compressed/P18/18.8.webp", "fotot-compressed/P18/18.9.webp", "fotot-compressed/P18/18.10.webp", "fotot-compressed/P18/18.11.webp"]'>
           <div class="project-card-img">
-            <img src="fotot-compressed/P18/18.1.webp" alt="Shkalle Celiku me Dru dhe Metal" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
+            <img src="fotot-compressed/P18/18.2.webp" alt="Shkalle Celiku me Dru dhe Metal" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
             <div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>
             <span class="expand-icon">&#8599;</span>
           </div>
@@ -1038,9 +994,9 @@ function declineCookies(){
             <p class="project-meta">Shkallë · 2021</p>
           </div>
         </div>
-        <div class="project-card fade-up" data-title-al="Shkalle emergjence" data-title-en="Emergency Stairs" data-desc-al="Parapet (mbrojteset anesore) I shkalleve emergjente" data-desc-en="Emergency staircase parapet railings - built to safety standards without compromising on clean, industrial design." data-year="2021" data-category-al="Shkallë" data-gallery='["fotot-compressed/P56/56.2.webp", "fotot-compressed/P56/56.3.webp", "fotot-compressed/P56/56.4.webp"]'>
+        <div class="project-card fade-up" data-title-al="Shkalle emergjence" data-title-en="Emergency Stairs" data-desc-al="Parapet (mbrojteset anesore) I shkalleve emergjente" data-desc-en="Emergency staircase parapet railings - built to safety standards without compromising on clean, industrial design." data-year="2021" data-category-al="Shkallë" data-gallery='["fotot-compressed/P56/56.4.webp", "fotot-compressed/P56/56.1.webp", "fotot-compressed/P56/56.2.webp", "fotot-compressed/P56/56.3.webp", "fotot-compressed/P56/56.5.webp", "fotot-compressed/P56/56.6.webp"]'>
           <div class="project-card-img">
-            <img src="fotot-compressed/P56/56.1.webp" alt="Shkalle emergjence" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
+            <img src="fotot-compressed/P56/56.4.webp" alt="Shkalle emergjence" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
             <div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>
             <span class="expand-icon">&#8599;</span>
           </div>
@@ -1336,9 +1292,9 @@ function declineCookies(){
             <p class="project-meta">Kangjella & Korimano · 2019</p>
           </div>
         </div>
-        <div class="project-card fade-up" data-title-al="Zgjidhje e plote e jashtme metalurgjike" data-title-en="Complete Exterior Metalwork" data-desc-al="kangjella rrethimi, edhe der e jashtme skorever me telekomand. Dhe dere e vogel per kembesoret" data-desc-en="Perimeter fence with a remote-controlled sliding gate and a separate pedestrian entry door - security and elegance in one." data-year="2021" data-category-al="Kangjella &amp; Korimano" data-gallery='["fotot-compressed/P43/43.2.webp", "fotot-compressed/P43/43.3.webp", "fotot-compressed/P43/43.4.webp"]'>
+        <div class="project-card fade-up" data-title-al="Zgjidhje e plote e jashtme metalurgjike" data-title-en="Complete Exterior Metalwork" data-desc-al="kangjella rrethimi, edhe der e jashtme skorever me telekomand. Dhe dere e vogel per kembesoret" data-desc-en="Perimeter fence with a remote-controlled sliding gate and a separate pedestrian entry door - security and elegance in one." data-year="2021" data-category-al="Kangjella &amp; Korimano" data-gallery='["fotot-compressed/P43/43.5.webp", "fotot-compressed/P43/43.1.webp", "fotot-compressed/P43/43.2.webp", "fotot-compressed/P43/43.3.webp", "fotot-compressed/P43/43.4.webp", "fotot-compressed/P43/43.6.webp"]'>
           <div class="project-card-img">
-            <img src="fotot-compressed/P43/43.1.webp" alt="Zgjidhje e plote e jashtme metalurgjike" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
+            <img src="fotot-compressed/P43/43.5.webp" alt="Zgjidhje e plote e jashtme metalurgjike" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
             <div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>
             <span class="expand-icon">&#8599;</span>
           </div>
@@ -2108,9 +2064,9 @@ function declineCookies(){
             <p class="project-meta">Strukturë · 2023</p>
           </div>
         </div>
-        <div class="project-card fade-up" data-title-al="Ndertese Industriale Celiku" data-title-en="Industrial Steel Building" data-desc-al="Ndërtesë industriale çeliku - skelet i plotë metalik i projektuar dhe montuar për qëndrueshmëri maksimale dhe përdorim afatgjatë." data-desc-en="Industrial steel building - full metal frame designed and assembled for maximum structural integrity and long-term use." data-year="2022" data-category-al="Strukturë" data-gallery='["fotot-compressed/P52/52.10.webp", "fotot-compressed/P52/52.11.webp", "fotot-compressed/P52/52.2.webp"]'>
+        <div class="project-card fade-up" data-title-al="Ndertese Industriale Celiku" data-title-en="Industrial Steel Building" data-desc-al="Ndërtesë industriale çeliku - skelet i plotë metalik i projektuar dhe montuar për qëndrueshmëri maksimale dhe përdorim afatgjatë." data-desc-en="Industrial steel building - full metal frame designed and assembled for maximum structural integrity and long-term use." data-year="2022" data-category-al="Strukturë" data-gallery='["fotot-compressed/P52/52.5.webp", "fotot-compressed/P52/52.1.webp", "fotot-compressed/P52/52.2.webp", "fotot-compressed/P52/52.3.webp", "fotot-compressed/P52/52.4.webp", "fotot-compressed/P52/52.6.webp", "fotot-compressed/P52/52.7.webp", "fotot-compressed/P52/52.8.webp", "fotot-compressed/P52/52.9.webp", "fotot-compressed/P52/52.10.webp", "fotot-compressed/P52/52.11.webp"]'>
           <div class="project-card-img">
-            <img src="fotot-compressed/P52/52.1.webp" alt="Ndertese Industriale Celiku" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
+            <img src="fotot-compressed/P52/52.5.webp" alt="Ndertese Industriale Celiku" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
             <div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>
             <span class="expand-icon">&#8599;</span>
           </div>
@@ -2738,9 +2694,9 @@ function declineCookies(){
             <p class="project-meta">Arredim & Mobilje · 2023</p>
           </div>
         </div>
-        <div class="project-card fade-up" data-title-al="Rimodelim dyqani" data-title-en="Remodeling work" data-desc-al="Rimodelim i plotë dyqani me elementë çeliku - transformim hapësire komerciale me dizajn të ri dhe funksionalitet të rritur." data-desc-en="Full shop remodeling with steel elements - a commercial space transformed with a fresh design and improved functionality." data-year="2023" data-category-al="Arredim &amp; Mobilje" data-gallery='["fotot-compressed/P60/60.2.webp", "fotot-compressed/P60/60.3.webp"]'>
+        <div class="project-card fade-up" data-title-al="Rimodelim dyqani" data-title-en="Remodeling work" data-desc-al="Rimodelim i plotë dyqani me elementë çeliku - transformim hapësire komerciale me dizajn të ri dhe funksionalitet të rritur." data-desc-en="Full shop remodeling with steel elements - a commercial space transformed with a fresh design and improved functionality." data-year="2023" data-category-al="Arredim &amp; Mobilje" data-gallery='["fotot-compressed/P60/60.3.webp", "fotot-compressed/P60/60.1.webp", "fotot-compressed/P60/60.2.webp"]'>
           <div class="project-card-img">
-            <img src="fotot-compressed/P60/60.1.webp" alt="Rimodelim dyqani" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
+            <img src="fotot-compressed/P60/60.3.webp" alt="Rimodelim dyqani" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
             <div class="project-hover-circle"><div class="brass-circle">Shiko projektin</div></div>
             <span class="expand-icon">&#8599;</span>
           </div>
@@ -3103,7 +3059,7 @@ function declineCookies(){
   <section class="qse-ghost-section qse-ghost-section--rev fade-up">
     <div class="qse-split">
       <div class="qse-split-img">
-        <img src="fotot-compressed/P140/140.1.webp" alt="Siguri strukturash metalike - Work Steel" style="width:100%;height:100%;object-fit:cover;">
+        <img src="fotot-compressed/P52/52.5.webp" alt="Siguri strukturash metalike - Work Steel" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="qse-split-text">
         <h2 class="qse-ghost-heading" id="sherbime-security-title">Siguri</h2>
@@ -3114,7 +3070,7 @@ function declineCookies(){
   <section class="qse-ghost-section fade-up">
     <div class="qse-split">
       <div class="qse-split-img">
-        <img src="fotot-compressed/P111/111.1.webp" alt="Mjedisi dhe riciklimi çeliku - Work Steel" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+        <img src="fotot-compressed/P111/111.1.webp" alt="Mjedisi dhe riciklimi çeliku - Work Steel" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;">
       </div>
       <div class="qse-split-text">
         <h2 class="qse-ghost-heading" id="sherbime-env-title">Mjedisi</h2>
@@ -3290,7 +3246,7 @@ function declineCookies(){
       </div>
     </div>
     <div class="contact-types-right">
-      <img src="fotot-compressed/P77/77.1.webp" alt="Work Steel - Punime metalike" loading="lazy" decoding="async">
+      <img src="fotot-compressed/P2/2.15.webp" alt="Work Steel - Punime metalike" loading="lazy" decoding="async">
     </div>
   </section>
 
@@ -3301,7 +3257,7 @@ function declineCookies(){
     </p>
     <div class="guiding-photos fade-up">
       <div class="guiding-photo-a">
-        <img src="fotot-compressed/P77/77.3.webp" alt="Ekipi në punë" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
+        <img src="fotot-compressed/P3/3.11.webp" alt="Ekipi në punë" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
       </div>
       <div class="guiding-photo-b">
         <img src="fotot-compressed/P134/134.1.webp" alt="Instalim" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">
@@ -3316,9 +3272,12 @@ function declineCookies(){
         <span class="section-label" style="color:rgba(245,240,235,0.5);">KONTAKTO</span>
         <h2 class="contact-form-title" style="font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-style:italic;color:var(--cream);margin:16px 0 40px;">Na Kontaktoni</h2>
         <p id="kontakt-form-intro" style="color:rgba(245,240,235,0.65);font-size:14px;margin:-16px 0 28px;max-width:520px;line-height:1.6;">Gati për të filluar projektin tuaj? Na dërgoni mesazhin tuaj me foto dhe skica - ju përgjigjemi brenda 24 orëve.</p>
-        <form class="contact-form-ws ks-form" id="ksContactForm" action="https://formspree.io/f/xpzvkjqr" method="POST" enctype="multipart/form-data" onsubmit="if(typeof gtag==='function'){gtag('event','generate_lead',{form_name:'contact_form_ks'});} if(typeof fbq==='function'){fbq('track','Lead');}">
-          <!-- Honeypot: hidden from humans, bots fill it in and get rejected -->
-          <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <form class="contact-form-ws ks-form" id="ksContactForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" onsubmit="if(typeof gtag==='function'){gtag('event','generate_lead',{form_name:'contact_form_ks'});} if(typeof fbq==='function'){fbq('track','Lead');}">
+          <input type="hidden" name="access_key" value="e4fdc740-cf98-4002-a6a5-be9f4e8865ed">
+          <input type="hidden" name="subject" value="Kërkesë e re nga Work Steel Website">
+          <input type="hidden" name="from_name" value="Work Steel Website">
+          <input type="text" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="file" id="fileInputK" name="attachments" accept=".jpg,.jpeg,.png,.heic,.pdf,.dwg,.dxf" multiple style="display:none;">
           <div class="form-group ks-group"><label class="ks-label" for="ks-name">Emri i plotë</label><input id="ks-name" type="text" name="name" required class="ks-input" placeholder="p.sh. John Doe" data-placeholder-al="p.sh. John Doe" data-placeholder-en="e.g. John Smith" autocomplete="name"></div>
           <div class="form-group ks-group"><label class="ks-label" for="ks-email">Email</label><input id="ks-email" type="email" name="email" required class="ks-input" placeholder="ju@shembull.com" data-placeholder-al="ju@shembull.com" data-placeholder-en="you@example.com" autocomplete="email"></div>
           <div class="form-group ks-group"><label class="ks-label" for="ks-phone">Telefon (WhatsApp)</label><input id="ks-phone" type="tel" name="phone" class="ks-input" placeholder="+355 68 ..." data-placeholder-al="+355 68 ..." data-placeholder-en="+355 68 ..." autocomplete="tel"></div>
@@ -3331,7 +3290,6 @@ function declineCookies(){
         </form>
       </div>
       <div class="upload-area ks-upload-area" id="uploadAreaK">
-        <input type="file" id="fileInputK" name="attachments[]" accept=".jpg,.jpeg,.png,.heic,.pdf,.dwg,.dxf" multiple style="display:none;">
         <div id="uploadPromptK">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:rgba(245,240,235,0.4);margin-bottom:14px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           <p class="ks-upload-p">Shtoni skedarë këtu</p>
@@ -3420,12 +3378,11 @@ function declineCookies(){
     </div>
     <!-- GALLERY -->
     <div class="project-modal-gallery" id="modalGallery">
-      <div class="project-modal-gallery-item" id="modalGalleryMain">
-        <img id="modalGalleryImg1" src="" alt="" loading="lazy" decoding="async">
-      </div>
-      <div class="project-modal-gallery-secondary">
-        <div class="project-modal-gallery-item"><img id="modalGalleryImg2" src="" alt="" loading="lazy" decoding="async"></div>
-        <div class="project-modal-gallery-item"><img id="modalGalleryImg3" src="" alt="" loading="lazy" decoding="async"></div>
+      <div class="modal-gallery-strip" id="modalGalleryStrip"></div>
+      <div class="modal-gallery-nav">
+        <button class="modal-gallery-prev" id="modalGalleryPrev" aria-label="Previous">&#8592;</button>
+        <span class="modal-gallery-counter" id="modalGalleryCounter">1 / 1</span>
+        <button class="modal-gallery-next" id="modalGalleryNext" aria-label="Next">&#8594;</button>
       </div>
     </div>
     <!-- RELATED PROJECTS -->
