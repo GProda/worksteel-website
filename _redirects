@@ -9,4 +9,4 @@ http://worksteel.al/* https://worksteel.al/:splat 301!
 http://www.worksteel.al/* https://worksteel.al/:splat 301!
 
 # SPA fallback — serve index for all routes (important for direct URL access)
-/* /worksteel-optimized.html 200
+/* /index.html 200

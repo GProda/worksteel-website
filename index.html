@@ -2,7 +2,7 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <!-- PRIMARY SEO -->
@@ -56,7 +56,10 @@
 <link rel="dns-prefetch" href="https://connect.facebook.net">
 <link rel="dns-prefetch" href="https://wa.me">
 <!-- Hero image preload - loads in parallel with HTML parsing, not after -->
-<link rel="preload" as="image" href="fotot-compressed/P53/53.1.webp">
+<link rel="preload" as="image" href="fotot-compressed/P53/53.1.webp" fetchpriority="high">
+<!-- Preload scripts so they download while HTML parses -->
+<link rel="preload" as="script" href="/projects.js">
+<link rel="preload" as="script" href="/main.js">
 <!-- Fonts: preload CSS for fastest possible render, swap when woff2 arrives -->
 <link rel="preload" as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
@@ -202,12 +205,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-THHPHHQS');</script>
 <!-- End Google Tag Manager -->
 
-<!-- GOOGLE ANALYTICS 4 - PASQYRO Measurement ID: analytics.google.com → Admin → Data Streams → G-XXXXXXXXXX -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3D3T3T3XK3"></script>
+<!-- GA4 is loaded and managed via Google Tag Manager (GTM-THHPHHQS) above -->
+<!-- Consent defaults are set via GTM's consent initialization trigger -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
   gtag('consent', 'default', {
     'ad_storage': 'denied',
     'ad_user_data': 'denied',
@@ -215,7 +217,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'analytics_storage': 'denied',
     'wait_for_update': 500
   });
-  gtag('config', 'G-3D3T3T3XK3', { 'anonymize_ip': true });
 </script>
 
 <!-- Meta Pixel Code - fires only after cookie consent (GDPR compliant) -->
@@ -240,6 +241,7 @@ fbq('init', '1256416026609177');
 
 <!-- FLOATING WHATSAPP CTA -->
 <a class="wa-float" href="https://wa.me/355689030944?text=P%C3%ABrsh%C3%ABndetje%20Work%20Steel%2C%20do%20doja%20nj%C3%AB%20ofert%C3%AB%20p%C3%ABr..." target="_blank" rel="noopener" aria-label="Kontakto Work Steel në WhatsApp" onclick="if(typeof gtag==='function'){gtag('event','whatsapp_click',{source:'float'});} if(typeof fbq==='function'){fbq('track','Contact');}">
+  <span class="wa-badge" aria-hidden="true">1</span>
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.5 0 .18 5.32.18 11.88c0 2.09.55 4.13 1.6 5.93L0 24l6.35-1.66a11.85 11.85 0 0 0 5.7 1.45h.01c6.55 0 11.87-5.32 11.87-11.88 0-3.17-1.24-6.15-3.41-8.43zM12.06 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.77.99 1.01-3.67-.24-.38a9.86 9.86 0 0 1-1.51-5.27c0-5.45 4.44-9.88 9.91-9.88 2.65 0 5.14 1.03 7.01 2.9a9.82 9.82 0 0 1 2.9 6.99c0 5.45-4.44 9.89-9.9 9.89zm5.43-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37s-1.05 1.02-1.05 2.5 1.08 2.9 1.23 3.1c.15.2 2.12 3.24 5.14 4.54.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
   <span class="wa-label">WhatsApp</span>
 </a>
@@ -281,7 +283,8 @@ fbq('init', '1256416026609177');
 })();
 function acceptCookies(){
   try { localStorage.setItem('ws_cookie_consent','granted'); } catch(e){}
-  document.getElementById('cookieBanner').classList.remove('show');
+  var b = document.getElementById('cookieBanner');
+  b.classList.remove('show');
   if (typeof gtag === 'function') {
     gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});
   }
@@ -352,7 +355,7 @@ function declineCookies(){
   <!-- HERO -->
   <section class="hero-split" style="padding:0;">
     <div class="hero-left fade-right hero-reveal" style="transition-delay:0.2s;">
-      <img src="fotot-compressed/P53/53.1.webp" alt="Shkallë spirale çeliku corten me porosi - punime metalike Work Steel Tiranë" style="width:100%;height:100%;object-fit:cover;" loading="eager" decoding="async">
+      <img src="fotot-compressed/P53/53.1.webp" alt="Shkallë spirale çeliku corten me porosi - punime metalike Work Steel Tiranë" style="width:100%;height:100%;object-fit:cover;" loading="eager" fetchpriority="high" decoding="sync">
     </div>
     <div class="hero-right">
       <h1 class="hero-statement fade-up hero-reveal">
@@ -365,7 +368,7 @@ function declineCookies(){
         <span class="hero-line-4" aria-hidden="true">me dorë - Tiranë.</span>
       </h1>
       <div class="hero-ctas fade-up hero-reveal" style="transition-delay:0.4s;">
-        <a class="btn-brass hero-cta-primary" onclick="navigateTo('kontakt')" aria-label="Kërko ofertë falas" id="heroCtaPrimary"><span>KËRKO OFERTË FALAS</span></a>
+        <button class="btn-brass hero-cta-primary" id="heroCtaPrimary" aria-label="Kërko ofertë falas" onclick="document.getElementById('contactModal').classList.add('is-open');document.body.style.overflow='hidden';"><span>KËRKO OFERTË FALAS</span></button>
         <a class="btn-outline" onclick="navigateTo('punet')"><span>SHIKO PUNËT</span></a>
       </div>
       <p class="hero-microcopy fade-up hero-reveal" style="transition-delay:0.55s;" id="heroMicrocopy">Pa detyrim. Ofertë brenda 48 orëve.</p>
@@ -644,6 +647,21 @@ function declineCookies(){
         <h3 class="step-title playfair">Dorëzimi</h3>
         <p class="step-desc">Ekipi ynë instalon, kontrollon dhe dorëzon. Nuk largohemi derisa gjithçka është si duhet.</p>
         <span class="step-time">Garanci 2 vjet</span>
+      </div>
+    </div>
+
+    <!-- PROCESS CTA -->
+    <div class="process-cta fade-up">
+      <p class="process-cta-text">Gati të filloni? Na kontaktoni — ofertë falas brenda 48 orëve.</p>
+      <div class="process-cta-actions">
+        <a class="process-cta-wa" href="https://wa.me/355689030944?text=P%C3%ABrsh%C3%ABndetje%20Work%20Steel%2C%20do%20doja%20nj%C3%AB%20ofert%C3%AB%20p%C3%ABr..." target="_blank" rel="noopener" onclick="if(typeof gtag==='function'){gtag('event','whatsapp_click',{source:'process_cta'});} if(typeof fbq==='function'){fbq('track','Contact');}">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.5 0 .18 5.32.18 11.88c0 2.09.55 4.13 1.6 5.93L0 24l6.35-1.66a11.85 11.85 0 0 0 5.7 1.45h.01c6.55 0 11.87-5.32 11.87-11.88 0-3.17-1.24-6.15-3.41-8.43zM12.06 21.8h-.01a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.77.99 1.01-3.67-.24-.38a9.86 9.86 0 0 1-1.51-5.27c0-5.45 4.44-9.88 9.91-9.88 2.65 0 5.14 1.03 7.01 2.9a9.82 9.82 0 0 1 2.9 6.99c0 5.45-4.44 9.89-9.9 9.89zm5.43-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37s-1.05 1.02-1.05 2.5 1.08 2.9 1.23 3.1c.15.2 2.12 3.24 5.14 4.54.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+          WhatsApp
+        </a>
+        <a class="process-cta-email" href="mailto:worksteel.shpk@gmail.com?subject=K%C3%ABrkesë%20për%20ofertë&body=Përshëndetje%20Work%20Steel%2C%0A%0ADo%20doja%20të%20merrja%20një%20ofertë%20për...">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          Email
+        </a>
       </div>
     </div>
   </section>
@@ -3415,6 +3433,33 @@ function declineCookies(){
   </div>
 </div>
 
+<script src="/projects.js"></script>
 <script src="/main.js"></script>
+
+<!-- CONTACT MODAL -->
+<div id="contactModal" class="contact-modal" role="dialog" aria-modal="true" aria-label="Na kontaktoni" onclick="if(event.target===this){this.classList.remove('is-open');document.body.style.overflow='';}">
+  <div class="contact-modal-inner">
+    <button class="contact-modal-close" aria-label="Mbyll" onclick="document.getElementById('contactModal').classList.remove('is-open');document.body.style.overflow='';">&#x2715;</button>
+    <p class="contact-modal-eyebrow">Ofertë Falas</p>
+    <h2 class="contact-modal-heading">Si dëshironi<br>të na kontaktoni?</h2>
+    <p class="contact-modal-sub">Pa detyrim. Përgjigje brenda 48 orëve.</p>
+    <div class="contact-modal-options">
+      <a class="contact-opt contact-opt-wa" href="https://wa.me/355689030944?text=P%C3%ABrsh%C3%ABndetje%20Work%20Steel%2C%20do%20doja%20nj%C3%AB%20ofert%C3%AB%20p%C3%ABr%20punim%20metalik." target="_blank" rel="noopener" onclick="if(typeof gtag==='function'){gtag('event','whatsapp_click',{source:'hero_modal'});} if(typeof fbq==='function'){fbq('track','Contact');}">
+        <span class="contact-opt-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L0 24l6.335-1.505A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-4.964-1.349l-.356-.211-3.762.893.952-3.67-.232-.374A9.785 9.785 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        </span>
+        <span class="contact-opt-label">WhatsApp</span>
+        <span class="contact-opt-desc">Mesazh i menjëhershëm</span>
+      </a>
+      <a class="contact-opt contact-opt-email" href="mailto:worksteel.shpk@gmail.com?subject=K%C3%ABrkesë%20për%20ofertë&body=Përshëndetje%20Work%20Steel%2C%0A%0ADo%20doja%20të%20merrja%20një%20ofertë%20për%20punime%20metalike.">
+        <span class="contact-opt-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        </span>
+        <span class="contact-opt-label">Email</span>
+        <span class="contact-opt-desc">worksteel.shpk@gmail.com</span>
+      </a>
+    </div>
+  </div>
+</div>
 </body>
 </html>

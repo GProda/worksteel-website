@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage / Main SPA entry -->
+  <url>
+    <loc>https://worksteel.al/</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://worksteel.al/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://worksteel.al/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://worksteel.al/"/>
+    <!-- Hero image -->
+    <image:image>
+      <image:loc>https://worksteel.al/fotot-compressed/P53/53.1.webp</image:loc>
+      <image:title>Shkallë spirale çeliku me porosi - Work Steel Tiranë</image:title>
+      <image:caption>Shkallë elikoidale spirale e brendshme - punime metalike me porosi Work Steel</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://worksteel.al/og-image.jpg</image:loc>
+      <image:title>Work Steel - Punime Metalike me Porosi Tiranë</image:title>
+      <image:caption>Work Steel SHPK - shkallë, parmakë, dyer dhe struktura çeliku në Tiranë</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Portfolio section -->
+  <url>
+    <loc>https://worksteel.al/#punet</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://worksteel.al/fotot-compressed/P53/53.1.webp</image:loc>
+      <image:title>Shkallë çeliku me porosi - Work Steel</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://worksteel.al/fotot-compressed/P1/1.1.webp</image:loc>
+      <image:title>Kangjella dhe korimano metalike - Work Steel</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://worksteel.al/fotot-compressed/P9/9.1.webp</image:loc>
+      <image:title>Dekor metalik dhe prerje CNC - Work Steel</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://worksteel.al/fotot-compressed/P3/3.1.webp</image:loc>
+      <image:title>Struktura çeliku dhe skelet konstruktiv - Work Steel</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://worksteel.al/fotot-compressed/P12/12.1.webp</image:loc>
+      <image:title>Fasada metalike dhe panel kompozit - Work Steel</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://worksteel.al/fotot-compressed/P6/6.1.webp</image:loc>
+      <image:title>Porta dhe dyer metalike me porosi - Work Steel</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://worksteel.al/fotot-compressed/P7/7.1.webp</image:loc>
+      <image:title>Arredim dhe mobilje metalike me porosi - Work Steel</image:title>
+    </image:image>
+  </url>
+
+  <!-- Services section -->
+  <url>
+    <loc>https://worksteel.al/#sherbime</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Expertise section -->
+  <url>
+    <loc>https://worksteel.al/#ekspertize</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Contact section -->
+  <url>
+    <loc>https://worksteel.al/#kontakt</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://worksteel.al/privacy.html</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+
+</urlset>
