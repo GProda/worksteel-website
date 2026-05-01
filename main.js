@@ -688,7 +688,7 @@ function initFileUpload(areaId, inputId, fileListId, promptId, addMoreBtnId, for
     submitBtn.textContent = currentLang === 'en' ? 'Sending...' : 'Duke dërguar...';
     submitBtn.disabled = true;
 
-    // Sync custom file picker files into the real input so Netlify receives them
+    // Sync custom file picker files into the real input
     var fileInput = input;
     var container = new DataTransfer();
     for (var i = 0; i < dt.files.length; i++) container.items.add(dt.files[i]);

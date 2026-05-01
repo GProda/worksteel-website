@@ -1935,7 +1935,7 @@ button.btn-brass {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(245,240,235,0.35);
+  border-bottom: 1px solid rgba(245,240,235,0.5);
   color: var(--cream);
   font-family: 'DM Sans', sans-serif;
   font-size: 16px;
@@ -2138,7 +2138,7 @@ button.btn-brass {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(245,240,235,0.35);
+  border-bottom: 1px solid rgba(245,240,235,0.5);
   color: var(--cream);
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
@@ -2148,7 +2148,7 @@ button.btn-brass {
   box-sizing: border-box;
   resize: none;
 }
-.ks-input::placeholder { color: rgba(245,240,235,0.22); }
+.ks-input::placeholder { color: rgba(245,240,235,0.5); }
 .ks-input:focus { border-bottom-color: var(--brass); }
 textarea.ks-input { min-height: 100px; }
 /* Submit - teal button matching site primary colour */

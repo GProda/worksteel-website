@@ -73,17 +73,18 @@ worksteel-deploy/
 ├── index.html              # Site HTML
 ├── style.css               # All site styles (extracted for caching)
 ├── main.js                 # All site JavaScript (extracted for caching)
+├── projects.js             # Project gallery data
 ├── privacy.html            # Privacy policy page
 ├── og-image.jpg            # Open Graph share image (1200×630)
 ├── favicon.svg / .png      # Favicons
 ├── apple-touch-icon.png    # iOS home screen icon
 ├── site.webmanifest        # PWA manifest
-├── _headers                # Netlify HTTP headers (security, caching)
-├── _redirects              # Netlify redirect rules
-└── Work-Steel-Website-photos/  # Source photo assets
-    ├── Architecture and Structure/
-    ├── Objects/
-    └── working/
+├── robots.txt              # Search engine crawl rules
+├── sitemap.xml             # XML sitemap for SEO
+├── _headers                # HTTP security & cache headers (Cloudflare Pages)
+├── _redirects              # Redirect rules + SPA fallback (Cloudflare Pages)
+├── fotot-compressed/       # Compressed project photo assets (WebP)
+└── logos/                  # Partner/client logo images
 ```
 
 ---
