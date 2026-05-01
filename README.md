@@ -18,7 +18,7 @@ Built with pure HTML, external CSS (`style.css`), and external JS (`main.js`). N
 - **Fonts** — Playfair Display (headings) + DM Sans (body) via Google Fonts
 - **Analytics** — Google Tag Manager + GA4 + Meta Pixel (GDPR consent-gated)
 - **SEO** — JSON-LD structured data (LocalBusiness, FAQPage, BreadcrumbList), hreflang, Open Graph, Twitter Card
-- **Hosting** — Netlify (via `_headers` and `_redirects` config)
+- **Hosting** — Cloudflare Pages (connected to GitHub, auto-deploys on push to `main`)
 - **PWA** — `site.webmanifest` + favicons for installability
 
 ---
@@ -62,7 +62,7 @@ Then open `http://localhost:8080`
 1. Install the **Live Server** extension in VS Code
 2. Right-click `index.html` → **Open with Live Server**
 
-> The contact form (Formspree) will not send emails when running locally — this only works on the live domain.
+> The contact form (Web3Forms) will not send emails when running locally — this only works on the live domain.
 
 ---
 
@@ -90,9 +90,9 @@ worksteel-deploy/
 
 ## Deployment
 
-Hosted on **Netlify**. Push to `main` → auto-deploy (if connected).
+Hosted on **Cloudflare Pages**. Push to `main` → auto-deploy via GitHub integration.
 
-Manual deploy: drag the entire `worksteel-deploy/` folder into the Netlify dashboard.
+Domain `worksteel.al` is registered on Netim with nameservers pointing to Cloudflare.
 
 ---
 
