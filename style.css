@@ -30,6 +30,8 @@ html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* Remove 300ms tap delay on all interactive elements */
@@ -45,6 +47,7 @@ body {
   color: var(--cream);
   font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
+  max-width: 100vw;
 }
 
 .playfair { font-family: 'Playfair Display', serif; }
@@ -4048,13 +4051,12 @@ footer.light { background: var(--cream); border-top-color: rgba(139,107,74,0.15)
 /* MOBILE LAYOUT         */
 /* ===================== */
 @media (max-width: 600px) {
-  /* Mobile: single column stack - all cols get top border including brand col */
+  /* Mobile: single column stack */
   .contact-info-bottom { grid-template-columns: 1fr; row-gap: 32px; padding-bottom: 24px; }
   .contact-info-col { border-left: none; padding: 0; border-top: 1px solid rgba(245,240,235,0.08); padding-top: 20px; }
   .contact-info-col--brand { border-top: none; padding-top: 0; }
-  /* ADRESA is 2nd child - give it a top border on mobile */
   .contact-info-bottom .contact-info-col:nth-child(2) { border-top: 1px solid rgba(245,240,235,0.08) !important; padding-top: 20px !important; }
-  /* Contact & Ekspertize pages: fix side padding so content fits phone width */
+  /* Section paddings — clamp to phone width */
   .contact-section { padding: 60px 20px 40px; }
   .ks-contact-section .contact-inner { padding: 60px 20px 0; }
   .contact-types-left { padding: 48px 20px; }
@@ -4063,14 +4065,35 @@ footer.light { background: var(--cream); border-top-color: rgba(139,107,74,0.15)
   .exp-top-left { padding: 80px 20px 40px; }
   .exp-bottom-left { padding: 40px 20px 60px; }
   .exp-referencat { padding: 60px 20px; }
-  .exp-logo-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 20px; }
+  .exp-logo-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .exp-logo-item { padding: 8px; }
+  .exp-logo-item img { max-height: 50px; }
+  .guiding-section { padding: 80px 20px; }
+  /* Footer: 2-col top row (WS brand + social), nav below */
+  footer {
+    padding: 32px 20px 24px;
+    grid-template-columns: auto 1fr;
+    row-gap: 20px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  /* Brand: show WS instead of Work Steel on mobile */
+  .footer-brand { grid-column: 1; grid-row: 1; font-size: 13px; letter-spacing: 2px; }
+  .footer-brand::before { content: 'WS'; }
+  .footer-brand > * { display: none; }
+  .footer-brand { font-size: 0; }
+  .footer-brand::before { font-size: 13px; font-family: 'DM Sans', sans-serif; font-weight: 600; letter-spacing: 2px; color: var(--brass); }
+  .footer-social { grid-column: 2; grid-row: 1; justify-self: end; gap: 16px; }
+  .footer-nav { grid-column: 1 / -1; grid-row: 2; justify-self: start; gap: 20px; flex-wrap: wrap; }
+  .footer-bottom { grid-column: 1 / -1; grid-row: 3; margin-top: 0; padding-top: 16px; }
+  .footer-tagline { grid-column: 1 / -1; grid-row: 4; }
 }
 
 /* ===================== */
 /* SECTION BACKGROUND    */
 /* FULL COVERAGE FIX     */
 /* ===================== */
-.page { background: var(--charcoal); }
+.page { background: var(--charcoal); overflow-x: hidden; }
 #page-arkitekture, #page-objekte, #page-punot { background: var(--cream); }
 #page-sherbime { background: var(--cream); }
 #page-kontakt  { background: var(--bronze); }
