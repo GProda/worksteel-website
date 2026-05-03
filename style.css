@@ -3172,6 +3172,7 @@ footer.light { background: var(--cream); border-top-color: rgba(139,107,74,0.15)
   .hero-left, .hero-right, .services-hero-left, .services-hero-right,
   .contact-hero-left, .contact-hero-right { width: 100%; }
   .hero-left { height: 56vw; min-height: 320px; }
+  .services-hero-left, .contact-hero-left { height: 52vw; min-height: 220px; }
   .hero-right, .services-hero-right, .contact-hero-right { padding: 60px 32px; }
   .hero-trust { gap: 16px; margin-top: 28px; }
   .trust-num { font-size: 22px; }
@@ -4053,6 +4054,16 @@ footer.light { background: var(--cream); border-top-color: rgba(139,107,74,0.15)
   .contact-info-col--brand { border-top: none; padding-top: 0; }
   /* ADRESA is 2nd child - give it a top border on mobile */
   .contact-info-bottom .contact-info-col:nth-child(2) { border-top: 1px solid rgba(245,240,235,0.08) !important; padding-top: 20px !important; }
+  /* Contact & Ekspertize pages: fix side padding so content fits phone width */
+  .contact-section { padding: 60px 20px 40px; }
+  .ks-contact-section .contact-inner { padding: 60px 20px 0; }
+  .contact-types-left { padding: 48px 20px; }
+  .services-hero-left { height: 52vw; min-height: 220px; flex-shrink: 0; width: 100%; }
+  .services-hero-right { width: 100%; padding: 40px 20px 48px; }
+  .exp-top-left { padding: 80px 20px 40px; }
+  .exp-bottom-left { padding: 40px 20px 60px; }
+  .exp-referencat { padding: 60px 20px; }
+  .exp-logo-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 20px; }
 }
 
 /* ===================== */
