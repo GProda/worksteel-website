@@ -3230,6 +3230,8 @@ footer.light { background: var(--cream); border-top-color: rgba(139,107,74,0.15)
   .contact-info-bottom .contact-info-col:nth-child(2) { border-top: none; padding-top: 0; }
   .contact-inner { gap: 40px; }
   footer { padding: 40px 32px 32px; grid-template-columns: 1fr 1fr 1fr; row-gap: 8px; }
+  .footer-brand { font-size: 0; }
+  .footer-brand::before { content: 'WS'; font-size: 13px; font-family: 'DM Sans', sans-serif; font-weight: 600; letter-spacing: 2px; color: var(--brass); }
   .footer-social { gap: 20px; }
   .footer-nav { grid-column: 2; grid-row: 1; justify-self: center; }
   .footer-social { grid-column: 3; grid-row: 1; justify-self: end; }
@@ -3878,6 +3880,8 @@ footer.light { background: var(--cream); border-top-color: rgba(139,107,74,0.15)
     bottom: env(safe-area-inset-bottom, 0);
     left: 0;
     right: 0;
+    width: 100%;
+    max-width: 100vw;
     z-index: 9998;
     height: 56px;
     padding-bottom: env(safe-area-inset-bottom, 0);
@@ -4060,14 +4064,15 @@ footer.light { background: var(--cream); border-top-color: rgba(139,107,74,0.15)
   .contact-section { padding: 60px 20px 40px; }
   .ks-contact-section .contact-inner { padding: 60px 20px 0; }
   .contact-types-left { padding: 48px 20px; }
+  .contact-hero-right { padding: 40px 20px; width: 100%; box-sizing: border-box; }
   .services-hero-left { height: 52vw; min-height: 220px; flex-shrink: 0; width: 100%; }
   .services-hero-right { width: 100%; padding: 40px 20px 48px; }
   .exp-top-left { padding: 80px 20px 40px; }
   .exp-bottom-left { padding: 40px 20px 60px; }
   .exp-referencat { padding: 60px 20px; }
-  .exp-logo-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .exp-logo-item { padding: 8px; }
-  .exp-logo-item img { max-height: 50px; }
+  .exp-logo-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .exp-logo-item { padding: 12px 16px; }
+  .exp-logo-item img { max-height: 48px; }
   .guiding-section { padding: 80px 20px; }
   /* Footer: 2-col top row (WS brand + social), nav below */
   footer {
