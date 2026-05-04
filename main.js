@@ -1336,8 +1336,15 @@ function switchLanguage(lang) {
     if (titleEl && card.dataset.titleAl) {
       titleEl.textContent = lang === 'en' ? (card.dataset.titleEn || card.dataset.titleAl) : card.dataset.titleAl;
     }
-    if (metaEl && card.dataset.metaAl) {
-      metaEl.textContent = lang === 'en' ? (card.dataset.metaEn || card.dataset.metaAl) : card.dataset.metaAl;
+    if (metaEl) {
+      if (card.dataset.metaAl) {
+        metaEl.textContent = lang === 'en' ? (card.dataset.metaEn || card.dataset.metaAl) : card.dataset.metaAl;
+      } else if (card.dataset.categoryAl) {
+        var catAl = card.dataset.categoryAl;
+        var catEn = metaTranslations[catAl] || catAl;
+        var yr = card.dataset.year || '';
+        metaEl.textContent = (lang === 'en' ? catEn : catAl) + (yr ? ' · ' + yr : '');
+      }
     }
   });
 
@@ -1764,10 +1771,14 @@ function buildHomePortfolio() {
     card.dataset.descAl    = p.descAl;
     card.dataset.descEn    = p.descEn;
     card.dataset.year      = p.year;
-    card.dataset.categoryAl = p.cats.split(',')[0].trim();
+    var _catAl0 = p.cats.split(',')[0].trim();
+    var _catEn0 = metaTranslations[_catAl0] || _catAl0;
+    card.dataset.categoryAl = _catAl0;
+    card.dataset.metaAl = _catAl0 + ' · ' + p.year;
+    card.dataset.metaEn = _catEn0 + ' · ' + p.year;
     card.dataset.gallery   = JSON.stringify(p.gallery);
 
-    var catDisplay = p.cats.split(',')[0].trim();
+    var catDisplay = currentLang === 'en' ? _catEn0 : _catAl0;
     card.innerHTML =
       '<div class="project-card-img">' +
         '<img src="' + p.thumb + '" alt="' + p.titleAl + ' - Work Steel" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">' +
@@ -1775,7 +1786,7 @@ function buildHomePortfolio() {
         '<span class="expand-icon">↗</span>' +
       '</div>' +
       '<div class="project-info">' +
-        '<p class="project-title">' + p.titleAl + '</p>' +
+        '<p class="project-title">' + (currentLang === 'en' ? p.titleEn : p.titleAl) + '</p>' +
         '<p class="project-meta">' + catDisplay + ' · ' + p.year + '</p>' +
       '</div>';
 
@@ -1852,7 +1863,11 @@ function buildPunetGrid() {
     card.dataset.categoryAl = p.cats.split(',')[0].trim();
     card.dataset.year       = p.year;
     card.dataset.gallery    = JSON.stringify(p.gallery);
-    var catDisplay = p.cats.split(',')[0].trim();
+    var catAl = p.cats.split(',')[0].trim();
+    var catEn = metaTranslations[catAl] || catAl;
+    card.dataset.metaAl = catAl + ' · ' + p.year;
+    card.dataset.metaEn = catEn + ' · ' + p.year;
+    var catDisplay = currentLang === 'en' ? catEn : catAl;
     card.innerHTML =
       '<div class="project-card-img">' +
         '<img src="' + p.thumb + '" alt="' + p.titleAl.replace(/"/g,'&quot;') + ' - Work Steel" style="width:100%;height:100%;object-fit:cover;" loading="lazy" decoding="async">' +
@@ -1860,7 +1875,7 @@ function buildPunetGrid() {
         '<span class="expand-icon">↗</span>' +
       '</div>' +
       '<div class="project-info">' +
-        '<p class="project-title" data-al="' + p.titleAl.replace(/"/g,'&quot;') + '" data-en="' + p.titleEn.replace(/"/g,'&quot;') + '">' + p.titleAl + '</p>' +
+        '<p class="project-title" data-al="' + p.titleAl.replace(/"/g,'&quot;') + '" data-en="' + p.titleEn.replace(/"/g,'&quot;') + '">' + (currentLang === 'en' ? p.titleEn : p.titleAl) + '</p>' +
         '<p class="project-meta">' + catDisplay + ' · ' + p.year + '</p>' +
       '</div>';
     grid.appendChild(card);
