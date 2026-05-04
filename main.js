@@ -47,9 +47,16 @@ const titleTranslations = {
 };
 
 const metaTranslations = {
-  'Arkitekturë': 'Architecture',
-  'Objekte':     'Objects',
-  'Çelik':       'Steel',
+  'Arkitekturë':        'Architecture',
+  'Objekte':            'Objects',
+  'Çelik':              'Steel',
+  'Shkallë':            'Staircases',
+  'Kangjella & Korimano': 'Railings & Handrails',
+  'Dekor & CNC':        'Decorative & CNC',
+  'Strukturë':          'Structures',
+  'Fasadë':             'Facade',
+  'Porta & Dyer':       'Gates & Doors',
+  'Arredim & Mobilje':  'Interiors & Furniture',
 };
 
 // ========================
@@ -884,6 +891,20 @@ const translations = {
     punet_filterDecor: 'Dekor & CNC',
     punet_searchPlaceholder: 'Kërko punën...',
     punet_recLabel: 'Për më shumë',
+    // ── SUB-PAGE TITLES & SIDEBARS ──
+    cat_shkalle_title: 'Shkallë', cat_shkalle_active: 'Shkallë ×',
+    cat_kangjella_title: 'Kangjella & Korimano', cat_kangjella_active: 'Kangjella & Korimano ×',
+    cat_dekor_title: 'Dekor & CNC', cat_dekor_active: 'Dekor & CNC ×',
+    cat_struktura_title: 'Strukturë', cat_struktura_active: 'Strukturë ×',
+    cat_fasada_title: 'Fasadë', cat_fasada_active: 'Fasadë ×',
+    cat_porta_title: 'Porta & Dyer', cat_porta_active: 'Porta & Dyer ×',
+    cat_arredim_title: 'Arredim & Mobilje', cat_arredim_active: 'Arredim & Mobilje ×',
+    cat_sidebar_shkalle: 'Shkallë', cat_sidebar_kangjella: 'Kangjella & Korimano',
+    cat_sidebar_dekor: 'Dekor & CNC', cat_sidebar_struktura: 'Strukturë',
+    cat_sidebar_fasada: 'Fasadë', cat_sidebar_porta: 'Porta & Dyer',
+    cat_sidebar_arredim: 'Arredim & Mobilje',
+    // ── KONTAKT HERO ──
+    kontaktHeroDesc: 'Gati për të ndërtuar diçka të veçantë?<br>Na shkruani dhe ne ju përgjigjemi brenda 24 orëve.',
     // ── FAQ ──
     faqLabel: 'PYETJE TË SHPESHTA',
     faqHeading: 'Çfarë Duhet të Dini',
@@ -1048,6 +1069,20 @@ const translations = {
     punet_filterDecor: 'Decorative & CNC',
     punet_searchPlaceholder: 'Search works...',
     punet_recLabel: 'For more',
+    // ── SUB-PAGE TITLES & SIDEBARS ──
+    cat_shkalle_title: 'Staircases', cat_shkalle_active: 'Staircases ×',
+    cat_kangjella_title: 'Railings & Handrails', cat_kangjella_active: 'Railings & Handrails ×',
+    cat_dekor_title: 'Decorative & CNC', cat_dekor_active: 'Decorative & CNC ×',
+    cat_struktura_title: 'Structures', cat_struktura_active: 'Structures ×',
+    cat_fasada_title: 'Facade', cat_fasada_active: 'Facade ×',
+    cat_porta_title: 'Gates & Doors', cat_porta_active: 'Gates & Doors ×',
+    cat_arredim_title: 'Interiors & Furniture', cat_arredim_active: 'Interiors & Furniture ×',
+    cat_sidebar_shkalle: 'Staircases', cat_sidebar_kangjella: 'Railings & Handrails',
+    cat_sidebar_dekor: 'Decorative & CNC', cat_sidebar_struktura: 'Structures',
+    cat_sidebar_fasada: 'Facade', cat_sidebar_porta: 'Gates & Doors',
+    cat_sidebar_arredim: 'Interiors & Furniture',
+    // ── KONTAKT HERO ──
+    kontaktHeroDesc: 'Ready to build something exceptional?<br>Write to us — we respond within 24 hours.',
     // ── FAQ ──
     faqLabel: 'FREQUENTLY ASKED',
     faqHeading: 'What You Should Know',
@@ -1372,8 +1407,50 @@ function switchLanguage(lang) {
   if (expGuidStmt) expGuidStmt.innerHTML = t.guidingStatement;
 
   // ════════════════════════
+  //  SUB-PAGES (category pages)
+  // ════════════════════════
+  const catPageMap = [
+    { id: 'page-shkalle',   titleKey: 'cat_shkalle_title',   activeKey: 'cat_shkalle_active' },
+    { id: 'page-kangjella', titleKey: 'cat_kangjella_title', activeKey: 'cat_kangjella_active' },
+    { id: 'page-dekor',     titleKey: 'cat_dekor_title',     activeKey: 'cat_dekor_active' },
+    { id: 'page-struktura', titleKey: 'cat_struktura_title', activeKey: 'cat_struktura_active' },
+    { id: 'page-fasada',    titleKey: 'cat_fasada_title',    activeKey: 'cat_fasada_active' },
+    { id: 'page-porta',     titleKey: 'cat_porta_title',     activeKey: 'cat_porta_active' },
+    { id: 'page-arredim',   titleKey: 'cat_arredim_title',   activeKey: 'cat_arredim_active' },
+  ];
+  catPageMap.forEach(function(pg) {
+    const pageEl = document.getElementById(pg.id);
+    if (!pageEl) return;
+    const titleEl = pageEl.querySelector('.cat-title em');
+    if (titleEl) titleEl.textContent = t[pg.titleKey];
+    const activeItem = pageEl.querySelector('.cat-sidebar .filter-item.active');
+    if (activeItem) activeItem.textContent = t[pg.activeKey];
+  });
+
+  const sidebarLinkMap = [
+    { page: 'shkalle',   key: 'cat_sidebar_shkalle' },
+    { page: 'kangjella', key: 'cat_sidebar_kangjella' },
+    { page: 'dekor',     key: 'cat_sidebar_dekor' },
+    { page: 'struktura', key: 'cat_sidebar_struktura' },
+    { page: 'fasada',    key: 'cat_sidebar_fasada' },
+    { page: 'porta',     key: 'cat_sidebar_porta' },
+    { page: 'arredim',   key: 'cat_sidebar_arredim' },
+  ];
+  document.querySelectorAll('.cat-sidebar .filter-item:not(.active)').forEach(function(a) {
+    const oc = a.getAttribute('onclick') || '';
+    sidebarLinkMap.forEach(function(m) {
+      if (oc.includes("'" + m.page + "'")) a.textContent = t[m.key];
+    });
+  });
+
+  // ════════════════════════
   //  KONTAKT PAGE
   // ════════════════════════
+  const ktHeroTitle = document.querySelector('#page-kontakt .services-hero-title em');
+  if (ktHeroTitle) ktHeroTitle.textContent = t.kontaktHeroTitle;
+  const ktHeroDesc = document.getElementById('kontakt-hero-desc');
+  if (ktHeroDesc) ktHeroDesc.innerHTML = t.kontaktHeroDesc;
+
   const ktTL = document.querySelector('#page-kontakt .contact-types-left .section-label');
   if (ktTL) ktTL.textContent = t.contactTypesLabel;
 
@@ -1491,7 +1568,7 @@ function switchLanguage(lang) {
           const rCatDisplay = lang === 'en'
             ? (div.dataset.categoryEn || div.dataset.categoryAl)
             : div.dataset.categoryAl;
-          mEl.textContent = rCatDisplay + ' · Çelik';
+          mEl.textContent = rCatDisplay + ' · ' + t.modalMaterialVal;
         }
       });
     }
