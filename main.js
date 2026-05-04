@@ -886,7 +886,7 @@ const translations = {
     punet_filterArch: 'Shkallë',
     punet_filterObj: 'Kangjella & Korimano',
     punet_filterGates: 'Porta & Dyer',
-    punet_filterStructures: 'Struktura',
+    punet_filterStructures: 'Strukturë',
     punet_filterInteriors: 'Arredim & Mobilje',
     punet_filterDecor: 'Dekor & CNC',
     punet_searchPlaceholder: 'Kërko punën...',
@@ -1062,7 +1062,7 @@ const translations = {
     punet_pageTitle: 'Works',
     punet_filterAll: 'All',
     punet_filterArch: 'Staircases',
-    punet_filterObj: 'Railings',
+    punet_filterObj: 'Railings & Handrails',
     punet_filterGates: 'Gates & Doors',
     punet_filterStructures: 'Structures',
     punet_filterInteriors: 'Interiors & Furniture',
@@ -1400,6 +1400,9 @@ function switchLanguage(lang) {
 
   const expAccBodies = document.querySelectorAll('#page-ekspertize .exp-accordion-body p');
   if (t.expAccordionBodies) t.expAccordionBodies.forEach((bd, i) => { if (expAccBodies[i]) expAccBodies[i].textContent = bd; });
+
+  const expRefTitleEl = document.getElementById('exp-ref-title');
+  if (expRefTitleEl) expRefTitleEl.textContent = t.expRefTitle;
 
   const expGuidLbl = document.querySelector('#page-ekspertize .guiding-section .section-label');
   if (expGuidLbl) expGuidLbl.textContent = t.guidingLabel;
