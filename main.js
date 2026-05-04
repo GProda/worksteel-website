@@ -803,7 +803,7 @@ const translations = {
     // ── NAV / FOOTER ──
     navArch: 'ARKITEKTURË', navObj: 'OBJEKTE', navServices: 'SHËRBIME',
     navExpertise: 'EKSPERTIZË', navContact: 'KONTAKT',
-    mobileNavArch: 'Arkitekturë', mobileNavObj: 'Objekte',
+    mobileNavPunet: 'Punët', mobileNavArch: 'Arkitekturë', mobileNavObj: 'Objekte',
     mobileNavServices: 'Shërbime', mobileNavExpertise: 'Ekspertizë', mobileNavContact: 'Kontakt',
     footerNavProjects: 'PUNËT', footerNavServices: 'SHËRBIMET', footerNavExpertise: 'EKSPERTIZË', footerNavContact: 'KONTAKT',
     footerTagline: 'Punime Metalike me Porosi · Custom Metalwork',
@@ -981,7 +981,7 @@ const translations = {
     // ── NAV / FOOTER ──
     navArch: 'ARCHITECTURE', navObj: 'OBJECTS', navServices: 'SERVICES',
     navExpertise: 'EXPERTISE', navContact: 'CONTACT',
-    mobileNavArch: 'Architecture', mobileNavObj: 'Objects',
+    mobileNavPunet: 'Works', mobileNavArch: 'Architecture', mobileNavObj: 'Objects',
     mobileNavServices: 'Services', mobileNavExpertise: 'Expertise', mobileNavContact: 'Contact',
     footerNavProjects: 'PROJECTS', footerNavServices: 'SERVICES', footerNavExpertise: 'EXPERTISE', footerNavContact: 'CONTACT',
     footerTagline: 'Custom Metalwork · Punime me Porosi',
@@ -1163,7 +1163,8 @@ function switchLanguage(lang) {
   const mob = document.querySelectorAll('#mobile-menu a[onclick]');
   mob.forEach(a => {
     const oc = a.getAttribute('onclick') || '';
-    if (oc.includes("'arkitekture'"))    a.textContent = t.mobileNavArch;
+    if (oc.includes("'punet'"))          a.textContent = t.mobileNavPunet;
+    else if (oc.includes("'arkitekture'"))    a.textContent = t.mobileNavArch;
     else if (oc.includes("'objekte'"))   a.textContent = t.mobileNavObj;
     else if (oc.includes("'sherbime'"))  a.textContent = t.mobileNavServices;
     else if (oc.includes("'ekspertize'"))a.textContent = t.mobileNavExpertise;
